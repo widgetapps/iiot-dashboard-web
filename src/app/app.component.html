@@ -1,2 +1,14 @@
-<h1>{{title}}</h1>
-<router-outlet></router-outlet>
+<app-header></app-header>
+<div class="header-spacer"></div>
+<div class="app-container" layout="row" layout-fill>
+  <mat-sidenav-container layout="row" layout-fill>
+    <mat-sidenav #sidenav role="navigation">
+      <app-sidenav-list></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content flex>
+      <main layout="row" layout-fill>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

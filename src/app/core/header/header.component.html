@@ -1,0 +1,81 @@
+<mat-toolbar flex color="primary">
+  <mat-toolbar-row>
+    <div fxHide.gt-xs>
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <a routerLink="/"><img src="assets/img/ONE_Platform_logo_White.svg" width="150" height="80"></a>
+    </div>
+    <div fxHide.xs *ngIf="currentUser$ | async">
+      <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+        <li>
+          <a routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="/trends">Trends</a>
+        </li>
+      </ul>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="currentUser$ | async">
+      <div>
+        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+          <li>
+            <mat-menu #settingsMenu="matMenu">
+              <button mat-menu-item routerLink="/alerts">
+                <mat-icon>add_alert</mat-icon>
+                <span>Manage Alerts</span>
+              </button>
+              <button mat-menu-item routerLink="/users">
+                <mat-icon>people</mat-icon>
+                <span>Manage Users</span>
+              </button>
+              <button mat-menu-item routerLink="/assets">
+                <mat-icon>widgets</mat-icon>
+                <span>Manage Assets</span>
+              </button>
+              <button mat-menu-item routerLink="/locations">
+                <mat-icon>place</mat-icon>
+                <span>Manage Locations</span>
+              </button>
+              <button mat-menu-item routerLink="/devices">
+                <mat-icon>donut_large</mat-icon>
+                <span>View Devices</span>
+              </button>
+            </mat-menu>
+            <a [matMenuTriggerFor]="settingsMenu"><mat-icon>settings</mat-icon></a>
+          </li>
+          <li>
+            <a routerLink="/notifications"><mat-icon>notifications</mat-icon></a>
+          </li>
+          <li>
+            <mat-menu #accountMenu="matMenu">
+              <button mat-menu-item routerLink="/account">
+                <mat-icon>account_circle</mat-icon>
+                <span>Account</span>
+              </button>
+              <button mat-menu-item routerLink="/logout">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+            <a [matMenuTriggerFor]="accountMenu"><mat-icon>account_circle</mat-icon></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="!(currentUser$ | async)">
+      <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+        <li>
+          <a routerLink="/login"><mat-icon>account_circle</mat-icon></a>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="header-row-client">
+    <div fxFlex fxLayout fxLayoutAlign="end">
+      <app-client-selector></app-client-selector>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

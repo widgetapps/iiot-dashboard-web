@@ -7,6 +7,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
+import {MatButtonModule} from "@angular/material/button";
+import {RouterModule} from "@angular/router";
+import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 
 
 
@@ -21,7 +24,11 @@ import {MatListModule} from "@angular/material/list";
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule,
+    RouterModule,
+    ExtendedModule,
+    FlexModule
   ]
 })
 export class CoreModule { }

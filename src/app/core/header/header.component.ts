@@ -6,12 +6,14 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  currentUser;
 
   constructor() { }
 
   @Output() public sidenavToggle = new EventEmitter();
 
   ngOnInit(): void {
+    this.currentUser = true;
   }
 
   public onToggleSidenav = () => {

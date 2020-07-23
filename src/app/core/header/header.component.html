@@ -5,18 +5,11 @@
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <div>
-      <a routerLink="/"><img alt="logo" src="assets/img/ONE_Platform_logo_White.svg" width="150" height="80"></a>
+    <div fxHide.xs>
+      <a routerLink="/"><img class="logo" alt="logo" src="assets/img/DAPAGEE-Logo-White.svg" width="150" ></a>
     </div>
-    <div fxHide.xs *ngIf="currentUser">
-      <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-        <li>
-          <a routerLink="/dashboard">Dashboard</a>
-        </li>
-        <li>
-          <a routerLink="/trends">Trends</a>
-        </li>
-      </ul>
+    <div fxHide.gt-xs>
+      <a routerLink="/"><img class="logo" alt="logo" src="assets/img/DAPAGEE-Logo-Word-White.svg" width="150" ></a>
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="currentUser">
       <div>
@@ -74,6 +67,16 @@
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row class="header-row-client">
+    <div fxHide.xs *ngIf="currentUser">
+      <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+        <li>
+          <a routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="/trends">Trends</a>
+        </li>
+      </ul>
+    </div>
     <div fxFlex fxLayout fxLayoutAlign="end">
       <app-client-selector></app-client-selector>
     </div>

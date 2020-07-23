@@ -15,3 +15,7 @@ body, input[type="text"], button {
   color: #333;
   font-family: Raleway, sans-serif;
 }
+
+.app-container, mat-sidenav-container {
+  height: 100%;
+}

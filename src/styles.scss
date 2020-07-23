@@ -9,5 +9,47 @@ body {
   font-family: Raleway, sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.header-spacer {
+  height: 110px;
+}
+
+app-header {
+  position: fixed;
+  width: 100%;
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.fab-add {
+  right: 20px;
+  bottom: 20px;
+  position: fixed !important;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+@media(max-width: 600px){
+  .header-spacer {
+    height: 100px;
+  }
+}
+
+.header-row-client .mat-form-field-infix {
+  border-top: 0 !important;
+}
+
+.header-row-client .mat-form-field-underline {
+  display: none;
+}
+
+.header-row-client .mat-form-field-wrapper, .header-row-client .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  border-bottom: 0;
+  padding-bottom: 0;
+  font-size: 14px;
+}
+
+.header-row-client {
+  height: 40px !important;
+}

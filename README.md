@@ -1,4 +1,7 @@
-# IiotPlatformWeb
+# DAPAGEE IIoT Platform - Responsive Web
+
+This project is the front-end for the [DAPAGEE RESTFul API](https://dapagee.dev/documentation/api/v2/).
+Visit the [DAPAGEE website](https://www.dapagee.com/) for more information.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 

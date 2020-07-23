@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {LoginComponent} from "./core/auth/login/login.component";
+import {LogoutComponent} from "./core/auth/logout/logout.component";
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
   { path: 'account', loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule) },
   { path: 'alerts', loadChildren: () => import('./modules/alerts/alerts.module').then(m => m.AlertsModule) },

@@ -10,11 +10,13 @@ import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterModule} from "@angular/router";
 import {ExtendedModule, FlexModule} from "@angular/flex-layout";
+import { LoginComponent } from './auth/login/login.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, ClientSelectorComponent, SidenavListComponent],
+  declarations: [HeaderComponent, ClientSelectorComponent, SidenavListComponent, LoginComponent, LogoutComponent],
   exports: [
     HeaderComponent,
     SidenavListComponent

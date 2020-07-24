@@ -1,1 +1,27 @@
-<p>login works!</p>
+<mat-card class="login-card">
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-subtitle>DAPAGEE IIoT Platform</mat-card-subtitle>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="authenticate(email.value, password.value)">
+
+      <div class="form-group">
+        <mat-form-field class="field-full-width">
+          <input type="email" #email formControlName="email" matInput placeholder="Email address" required>
+          <mat-error *ngIf="submitted && f.email.errors && f.email.errors.required">Email address is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="field-full-width">
+          <input type="password" #password formControlName="password" matInput placeholder="Password" required>
+          <mat-error *ngIf="submitted && f.email.errors && f.email.errors.required">Password is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="loading" mat-raised-button color="primary">Login</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -12,8 +12,13 @@ import {RouterModule} from "@angular/router";
 import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
-
+import { StoreModule } from '@ngrx/store';
+import * as fromLogin from './auth/login/store/reducer';
 
 @NgModule({
   declarations: [HeaderComponent, ClientSelectorComponent, SidenavListComponent, LoginComponent, LogoutComponent],
@@ -30,7 +35,12 @@ import { LogoutComponent } from './auth/logout/logout.component';
     MatButtonModule,
     RouterModule,
     ExtendedModule,
-    FlexModule
+    FlexModule,
+    MatCardModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    StoreModule.forFeature(fromLogin.loginFeatureKey, fromLogin.reducer)
   ]
 })
 export class CoreModule { }

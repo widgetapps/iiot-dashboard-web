@@ -7,6 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import {getLoggedIn} from '../../core/auth/login/store/reducer';
+
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
@@ -17,6 +19,8 @@ export class JwtInterceptor implements HttpInterceptor {
     Get the current user ID and the JWT
     Add the API headers
      */
+    console.log('Logged In State: ' + getLoggedIn);
+
     return next.handle(request);
   }
 }

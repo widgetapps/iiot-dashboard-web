@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { selectUserId, selectUser } from "../../core/auth/login/store/selectors";
+import { select, Store } from "@ngrx/store";
+import { User } from "../../shared/models/user.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<{ }>) { }
 
   ngOnInit(): void {
+  }
+
+  loginStateToConsole() {
+    //console.log('Logged In State: ' + getLoggedIn);
+    this.store.select(selectUser).subscribe(data => {
+      console.log('User State: ' + JSON.stringify(data));
+    });
   }
 
 }

@@ -21,7 +21,7 @@ export const initialState: State = {
   hasError: false
 };
 
-export const loginFeatureKey = 'login';
+export const loginFeatureKey = 'user';
 
 const loginReducer = createReducer(initialState,
   on(login, state => ({ ...state, user: state.user })),
@@ -37,3 +37,9 @@ function decodeResponse(response, state) {
   console.log('User State:' + JSON.stringify(state));
   return ({ ...state, user: decodedUser, loggedIn: true, hasError: false, isLoading: false });
 }
+
+export const getLoggedIn = (state: State) => state.loggedIn;
+export const getUser = (state: State) => state.user;
+export const errorMessage = (state: State) => state.errorMessage;
+export const hasError = (state: State) => state.hasError;
+export const isLoading = (state: State) => state.isLoading;

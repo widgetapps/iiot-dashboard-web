@@ -13,7 +13,7 @@ export class AuthEffects {
       ofType('[Login Page] Login'),
       exhaustMap(action =>
         this.authService.login(action.email, action.password).pipe(
-          map(response => ({ type: '[Login API] Login Success', payload: response })),
+          map(response => ({ type: '[Login API] Auth Success', response: response })),
           catchError(() => EMPTY)
         )
       )

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   authenticate(email: string, password: string) {
     this.store.dispatch(login({ email: email, password: password }));
-    //console.log('NgRX call...');
+    //this.router.navigate(['/']);
   }
 
   openSnackBar(message: string) {

@@ -16,14 +16,15 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-    console.log(email);
-    return this.http.post(`${environment.apiUrl}/authenticate`, {'email': email, 'password': password}, httpOptions)
+    return this.http.post(`${environment.apiUrl}/authenticate`, {'email': email, 'password': password}, httpOptions);
+    /*
       .pipe(
-        tap((res: User) => {
+        tap(response => {
           // authentication and local storage code can go here
-          console.log('Login response');
+          console.log('Login response: ' + JSON.stringify(response));
         })
       );
+     */
   }
 
   validate() {

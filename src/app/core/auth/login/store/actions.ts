@@ -1,5 +1,5 @@
 import {createAction, props, union} from '@ngrx/store';
-import { User } from "../../../../shared/models/user.model";
+import { Auth } from "../../../../shared/models/auth.model";
 
 export const login = createAction(
   '[Login Page] Login',
@@ -8,12 +8,12 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Login API] Login Success',
-  props<{user: User}>()
+  props<{ response: Auth }>()
 );
 
 export const loginError = createAction(
   '[Login API] Login Error',
-  props<{user: User}>()
+  props<{ message: string }>()
 );
 
 const all = union({

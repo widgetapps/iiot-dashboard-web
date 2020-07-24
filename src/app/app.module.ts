@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from "@angular/common/http";
 
 import { AuthEffects } from "./core/auth/login/store/effects";
+import * as fromAuth from './shared/reducers/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { AuthEffects } from "./core/auth/login/store/effects";
     FlexLayoutModule,
     MatSidenavModule,
     MatSnackBarModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ auth: fromAuth.reducer }),
     EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],

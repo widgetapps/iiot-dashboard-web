@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { selectUserId, selectUser } from "../../core/auth/login/store/selectors";
+import { selectUserId, selectUser, selectAuth } from "../../core/auth/login/store";
 import { select, Store } from "@ngrx/store";
-import { User } from "../../shared/models/user.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +18,9 @@ export class DashboardComponent implements OnInit {
     //console.log('Logged In State: ' + getLoggedIn);
     this.store.select(selectUser).subscribe(data => {
       console.log('User State: ' + JSON.stringify(data));
+    });
+    this.store.select(selectAuth).subscribe(data => {
+      console.log('Auth State: ' + JSON.stringify(data));
     });
   }
 

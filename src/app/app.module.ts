@@ -11,10 +11,11 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthEffects } from "./core/auth/login/store/effects";
 import * as fromAuth from './shared/reducers/auth.reducer';
+import { JwtInterceptor } from "./core/interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -29,10 +30,13 @@ import * as fromAuth from './shared/reducers/auth.reducer';
     FlexLayoutModule,
     MatSidenavModule,
     MatSnackBarModule,
-    StoreModule.forRoot({ auth: fromAuth.reducer }),
+    StoreModule.forRoot({  }),
+    StoreModule.forFeature(fromAuth.featureKey, fromAuth.reducer),
     EffectsModule.forRoot([AuthEffects])
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

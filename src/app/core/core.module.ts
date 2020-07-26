@@ -19,6 +19,7 @@ import {MatInputModule} from "@angular/material/input";
 
 import { StoreModule } from '@ngrx/store';
 import * as fromLogin from './auth/login/store/reducer';
+import { AuthenticationService } from "../shared/services/authentication.service";
 
 @NgModule({
   declarations: [HeaderComponent, ClientSelectorComponent, SidenavListComponent, LoginComponent, LogoutComponent],
@@ -40,7 +41,8 @@ import * as fromLogin from './auth/login/store/reducer';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    StoreModule.forFeature(fromLogin.loginFeatureKey, fromLogin.reducer)
-  ]
+    StoreModule.forFeature(fromLogin.featureKey, fromLogin.reducer)
+  ],
+  providers: [AuthenticationService]
 })
 export class CoreModule { }

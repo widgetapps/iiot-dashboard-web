@@ -20,14 +20,9 @@ export const featureKey = 'telemetrySummary';
 
 const trendsReducer = createReducer(initialState,
   on(getTrends, state => ({ ...state, telemetry: state.telemetry })),
-  on(getTrendsSuccess, (state, { data }) => handleResponse(data, state)),
+  on(getTrendsSuccess, (state, { data }) => ({ ...state, data: data, hasError: false, isLoading: false })),
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return trendsReducer(state, action);
-}
-
-function handleResponse(data, state) {
-  console.log('TRENDS DATA!');
-  return ({ ...state, data: data, hasError: false, isLoading: false });
 }

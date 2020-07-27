@@ -8,6 +8,7 @@ import { StoreModule } from "@ngrx/store";
 import * as fromTrends from "./store/trends-reducer";
 import { EffectsModule } from "@ngrx/effects";
 import { TrendsEffects } from "./store/trends-effects";
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TrendsEffects } from "./store/trends-effects";
     CommonModule,
     TrendsRoutingModule,
     StoreModule.forFeature(fromTrends.featureKey, fromTrends.reducer),
-    EffectsModule.forFeature([TrendsEffects])
+    EffectsModule.forFeature([TrendsEffects]),
+    ChartsModule
   ],
   providers: [ ClientsService ]
 })

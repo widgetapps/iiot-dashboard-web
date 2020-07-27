@@ -30,7 +30,7 @@ export class TrendsEffects {
 
   getTrends$ = createEffect( () => this.actions$.pipe(
     ofType(getTrends),
-    switchMap(() => this.clientsService.getSummaryTelemetry('5e41f50d47504d03aeed10b8', '2020-05-19T00:00:00.000Z', '2020-05-20T01:00:00.000Z', 'AREA6_0027_PI', '2h')
+    switchMap(props => this.clientsService.getSummaryTelemetry(props.clientId, props.start, props.end, props.tags, props.interval)
       .pipe(
         map(data => getTrendsSuccess({data}))
       )

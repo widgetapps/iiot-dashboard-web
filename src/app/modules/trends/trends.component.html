@@ -1,3 +1,17 @@
 <p>trends works!</p>
 
+
+<div style="display: block">
+  <canvas baseChart height="100"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>
+
 <a (click)="getTrends()">Get Trands!</a>

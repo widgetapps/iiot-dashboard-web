@@ -27,6 +27,11 @@
     "@ngrx/entity": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
+    "chart.js": "^2.9.3",
+    "chartjs-plugin-annotation": "^0.5.7",
+    "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31",
+    "ng2-charts": "^2.3.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

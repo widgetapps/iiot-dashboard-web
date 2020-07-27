@@ -7,7 +7,7 @@ import { StoreModule } from "@ngrx/store";
 import * as fromDevices from './store/reducer';
 import { ClientsService } from "../../shared/services/api";
 import { EffectsModule } from "@ngrx/effects";
-import {DeviceEffects} from "./store/effects";
+import { DeviceEffects } from "./store/effects";
 
 @NgModule({
   declarations: [DevicesComponent],

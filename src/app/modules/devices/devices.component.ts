@@ -21,9 +21,4 @@ export class DevicesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loadDevices() {
-    console.log(this.devices$);
-    this.store.dispatch(getAll({clientId: 'llll'}));
-  }
-
 }

@@ -11,17 +11,6 @@ export const devicesAdapter = createEntityAdapter<Device>({
   sortComparer: false
 });
 
-// -----------------------------------------
-// The shape of EntityState
-// ------------------------------------------
-// interface EntityState<Contact> {
-//   ids: string[] | number[];
-//   entities: { [id: string]: Contact };
-// }
-// -----------------------------------------
-// -> ids arrays allow us to sort data easily
-// -> entities map allows us to access the data quickly without iterating/filtering though an array of objects
-
 export interface State extends EntityState<Device> {
   // additional props here
 }
@@ -39,8 +28,6 @@ export const reducer = createReducer<State>(
   )
 );
 
-//export const getDeviceById = (id: string) => (state: State) => state.entities[id];
-
 // get the selectors
 const {
   selectIds,
@@ -49,14 +36,14 @@ const {
   selectTotal,
 } = devicesAdapter.getSelectors();
 
-// select the array of user ids
+// select the array of device ids
 export const selectDeviceIds = selectIds;
 
-// select the dictionary of user entities
+// select the dictionary of device entities
 export const selectDeviceEntities = selectEntities;
 
-// select the array of users
+// select the array of devices
 export const selectAllDevices = selectAll;
 
-// select the total user count
+// select the total device count
 export const selectDeviceTotal = selectTotal;

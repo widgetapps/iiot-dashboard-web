@@ -31,7 +31,7 @@ export class DevicesStoreFacade {
   }
    */
 
-  getContactById(id: number) {
+  getContactById(id: string) {
     return this.store.pipe(
       select(fromDevices.getDeviceById(id))
     )

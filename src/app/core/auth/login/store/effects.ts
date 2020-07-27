@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../shared/services/authentication.service';
-import {LoginActionsUnion} from "./actions";
+import { LoginActionsUnion } from "./actions";
 
 
 @Injectable()

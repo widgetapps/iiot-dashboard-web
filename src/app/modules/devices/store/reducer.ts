@@ -1,6 +1,6 @@
 import { Device } from '../../../shared/models';
-import {EntityState, createEntityAdapter} from '@ngrx/entity';
-import {createReducer, on} from '@ngrx/store';
+import { EntityState, createEntityAdapter } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
 import {
   getAllSuccess
 } from './actions';
@@ -39,4 +39,4 @@ export const reducer = createReducer<State>(
   )
 );
 
-export const getDeviceById = (id: number) => (state: State) => state.entities[id];
+export const getDeviceById = (id: string) => (state: State) => state.entities[id];

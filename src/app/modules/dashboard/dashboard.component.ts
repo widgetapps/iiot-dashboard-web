@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { selectUserId, selectUser, selectAuth } from "../../core/auth/login/store";
-import { select, Store } from "@ngrx/store";
+import * as authHelper from '../../shared/helpers/auth.helper';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,19 +8,15 @@ import { select, Store } from "@ngrx/store";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private store: Store<{ }>) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   loginStateToConsole() {
     //console.log('Logged In State: ' + getLoggedIn);
-    this.store.select(selectUser).subscribe(data => {
-      console.log('User State: ' + JSON.stringify(data));
-    });
-    this.store.select(selectAuth).subscribe(data => {
-      console.log('Auth State: ' + JSON.stringify(data));
-    });
+    console.log('Token: ' + authHelper.getJwt());
+    console.log('API Key: ' + authHelper.getApiKey());
   }
 
 }

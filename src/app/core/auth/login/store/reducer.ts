@@ -2,6 +2,7 @@ import {Action, createReducer, on} from '@ngrx/store';
 import {authSuccess, login} from './actions';
 import { User } from '../../../../shared/models';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import * as authHelper from '../../../../shared/helpers/auth.helper';
 
 const jwtHelper = new JwtHelperService();
 
@@ -25,16 +26,16 @@ export const featureKey = 'user';
 
 const loginReducer = createReducer(initialState,
   on(login, state => ({ ...state, user: state.user })),
-  on(authSuccess, (state, { response }) => decodeResponse(response, state)),
+  on(authSuccess, (state, { response }) => handleResponse(response, state)),
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return loginReducer(state, action);
 }
 
-function decodeResponse(response, state) {
-  const decodedUser: User = jwtHelper.decodeToken((response.token));
-  return ({ ...state, user: decodedUser, loggedIn: true, hasError: false, isLoading: false });
+function handleResponse(response, state) {
+  authHelper.processJwt(response.token);
+  return ({ ...state, user: authHelper.getUser(), loggedIn: true, hasError: false, isLoading: false });
 }
 
 export const getLoggedIn = (state: State) => state.loggedIn;

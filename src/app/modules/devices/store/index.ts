@@ -30,7 +30,7 @@ export const {
   selectAll: getAllDevices,
 } = fromDevices.devicesAdapter.getSelectors(getDevicesEntitiesState);
 
-export const getDeviceById = (id: number) => createSelector(
+export const getDeviceById = (id: string) => createSelector(
   getDevicesEntitiesState,
   fromDevices.getDeviceById(id)
 );

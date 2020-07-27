@@ -6,34 +6,28 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Store } from "@ngrx/store";
-import * as fromStore from '../auth/login/store';
+import * as authHelper from '../../shared/helpers/auth.helper';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private store: Store<{ }>) {}
-
-  apiKey: string;
-  token: string;
+  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     /*
     Get the current user ID and the JWT
     Add the API headers
      */
-    this.store.select(fromStore.selectApiKey).subscribe(v => this.apiKey = v);
-    this.store.select(fromStore.selectToken).subscribe(v => this.token = v);
+    const token = authHelper.getJwt();
 
-
-    if (this.token) {
-      console.log('API Key: ' + this.apiKey);
-      console.log('Token: ' + this.token);
+    if (token) {
+      console.log('API Key: ' + authHelper.getApiKey());
+      console.log('Token: ' + token);
 
       request = request.clone({
         setHeaders: {
-          'x-client-id': this.apiKey,
-          'x-access-token': this.token
+          'x-client-id': authHelper.getApiKey(),
+          'x-access-token': token
         }
       });
     }

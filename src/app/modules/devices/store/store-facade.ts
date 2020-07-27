@@ -9,7 +9,7 @@ import { Device } from '../../../shared/models';
 export class DevicesStoreFacade {
 
   devices$ = this.store.pipe(
-    select(fromDevices.getAllDevices)
+    select(fromDevices.selectAllDevices)
   );
 
   constructor(private store: Store<fromRoot.State>) { }

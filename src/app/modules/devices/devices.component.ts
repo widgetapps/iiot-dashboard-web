@@ -22,6 +22,7 @@ export class DevicesComponent implements OnInit {
   }
 
   loadDevices() {
+    console.log(this.devices$);
     this.store.dispatch(getAll({clientId: 'llll'}));
   }
 

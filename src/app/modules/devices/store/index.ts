@@ -17,8 +17,9 @@ export function reducers(state: DevicesState | undefined, action: Action) {
  * This is used for selecting feature states that are loaded eagerly or lazily.
  */
 
-export const getDevicesState = createFeatureSelector<DevicesState>('devices');
+export const getDevicesState = createFeatureSelector<fromDevices.State>('devices');
 
+/*
 export const getDevicesEntitiesState = createSelector(
   getDevicesState,
   state => state.devices
@@ -27,8 +28,21 @@ export const getDevicesEntitiesState = createSelector(
 export const {
   selectAll: getAllDevices,
 } = fromDevices.devicesAdapter.getSelectors(getDevicesEntitiesState);
+*/
 
-export const getDeviceById = (id: string) => createSelector(
-  getDevicesEntitiesState,
-  fromDevices.getDeviceById(id)
+export const selectDeviceIds = createSelector(
+  getDevicesState,
+  fromDevices.selectDeviceIds // shorthand for usersState => fromUser.selectUserIds(usersState)
+);
+export const selectDeviceEntities = createSelector(
+  getDevicesState,
+  fromDevices.selectDeviceEntities
+);
+export const selectAllDevices = createSelector(
+  getDevicesState,
+  fromDevices.selectAllDevices
+);
+export const selectDeviceTotal = createSelector(
+  getDevicesState,
+  fromDevices.selectDeviceTotal
 );

@@ -39,4 +39,24 @@ export const reducer = createReducer<State>(
   )
 );
 
-export const getDeviceById = (id: string) => (state: State) => state.entities[id];
+//export const getDeviceById = (id: string) => (state: State) => state.entities[id];
+
+// get the selectors
+const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal,
+} = devicesAdapter.getSelectors();
+
+// select the array of user ids
+export const selectDeviceIds = selectIds;
+
+// select the dictionary of user entities
+export const selectDeviceEntities = selectEntities;
+
+// select the array of users
+export const selectAllDevices = selectAll;
+
+// select the total user count
+export const selectDeviceTotal = selectTotal;

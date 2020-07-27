@@ -21,9 +21,6 @@ export class JwtInterceptor implements HttpInterceptor {
     const token = authHelper.getJwt();
 
     if (token) {
-      console.log('API Key: ' + authHelper.getApiKey());
-      console.log('Token: ' + token);
-
       request = request.clone({
         setHeaders: {
           'x-client-id': authHelper.getApiKey(),

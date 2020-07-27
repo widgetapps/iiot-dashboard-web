@@ -1,4 +1,4 @@
-import {createAction, props, union} from '@ngrx/store';
+import { createAction, props, union } from '@ngrx/store';
 import { Device } from "../../../shared/models";
 
 export const getAll = createAction (

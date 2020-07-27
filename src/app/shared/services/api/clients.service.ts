@@ -33,7 +33,6 @@ export class ClientsService {
   }
 
   getDevices(clientId: string) {
-    console.log('Get devices!');
     return this.http.get<Device[]>(`${this.baseUrl}/${clientId}/devices`, httpOptions);
   }
 }

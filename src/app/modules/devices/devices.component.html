@@ -1,11 +1,12 @@
 <p>These are devices</p>
 
-<div *ngIf="devices$; else loading">
+<div *ngIf="devices$ | async; else loading">
   <div *ngFor="let device of devices$ | async; trackBy: devicesTrackByFn">
     <div>{{device._id}}</div>
   </div>
 </div>
 
 <ng-template #loading>
-  <span>loading devices...</span>
+  <div>loading devices...</div>
+  <a (click)="loadDevices()">Load Devices</a>
 </ng-template>

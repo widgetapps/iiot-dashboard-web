@@ -6,13 +6,11 @@ export interface DevicesState {
 }
 
 /** Provide reducers with AoT-compilation compliance */
-/* Do I need this?
 export function reducers(state: DevicesState | undefined, action: Action) {
   return combineReducers({
     devices: fromDevices.reducer
   })(state, action)
 }
- */
 
 /**
  * The createFeatureSelector function selects a piece of state from the root of the state object.

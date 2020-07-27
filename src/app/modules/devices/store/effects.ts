@@ -24,7 +24,7 @@ import { selectClientId } from "../../../core/auth/login/store";
 @Injectable()
 export class DeviceEffects {
 
-  clientId$ = this.store.select(selectClientId);
+  //clientId$ = this.store.select(selectClientId);
 
   // TODO: Figure out how to get the clientId
   getAll$ = createEffect( () => this.actions$.pipe(

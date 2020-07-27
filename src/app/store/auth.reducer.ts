@@ -1,7 +1,6 @@
-/*
 import { Action, createReducer, on } from '@ngrx/store';
-import { login, authSuccess, loginError } from '../../core/auth/login/store/actions';
-import { Auth } from '../models';
+import { login, authSuccess, loginError } from '../core/auth/login/store/actions';
+import { Auth } from '../shared/models';
 
 export interface State {
   auth: Auth;
@@ -32,4 +31,3 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getToken = (state: State) => state.auth.token;
-*/

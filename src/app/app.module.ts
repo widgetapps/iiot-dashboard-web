@@ -14,7 +14,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthEffects } from "./core/auth/login/store/effects";
-import * as fromAuth from './shared/reducers/auth.reducer';
+import  * as fromAuth from './store/auth.reducer';
+import { ROOT_REDUCERS } from './store';
+
 import { JwtInterceptor } from "./core/interceptors/jwt.interceptor";
 
 @NgModule({
@@ -30,8 +32,7 @@ import { JwtInterceptor } from "./core/interceptors/jwt.interceptor";
     FlexLayoutModule,
     MatSidenavModule,
     MatSnackBarModule,
-    StoreModule.forRoot({  }),
-    StoreModule.forFeature(fromAuth.featureKey, fromAuth.reducer),
+    StoreModule.forRoot(ROOT_REDUCERS),
     EffectsModule.forRoot([AuthEffects])
   ],
   providers: [

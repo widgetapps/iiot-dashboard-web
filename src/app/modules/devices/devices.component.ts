@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Device } from "../../shared/models";
 import { DevicesStoreFacade } from "./store/store-facade";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-devices',

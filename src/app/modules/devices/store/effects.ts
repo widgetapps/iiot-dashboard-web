@@ -4,15 +4,16 @@ import {
   startWith,
   switchMap
 } from 'rxjs/operators';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ClientsService } from '../../../shared/services/api';
 import {
   DevicesActionsUnion,
   getAll,
   getAllSuccess
 } from './actions';
-import {Store} from "@ngrx/store";
-import {selectAuth, selectClientId, selectUser} from "../../../core/auth/login/store";
+import { Store } from "@ngrx/store";
+import * as fromRoot from '../../../store'
+import { selectClientId } from "../../../core/auth/login/store";
 
 
 /**
@@ -40,7 +41,7 @@ export class DeviceEffects {
   constructor(
     private actions$: Actions<DevicesActionsUnion>,
     private clientsService: ClientsService,
-    private store: Store<{ }>
+    private store: Store<fromRoot.State>
   ) {}
 
 }

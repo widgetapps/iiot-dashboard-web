@@ -1,10 +1,7 @@
-import {Action, createReducer, on} from '@ngrx/store';
-import {authSuccess, login} from './actions';
+import { Action, createReducer, on } from '@ngrx/store';
+import { authSuccess, login } from './actions';
 import { User } from '../../../../shared/models';
-import { JwtHelperService } from "@auth0/angular-jwt";
 import * as authHelper from '../../../../shared/helpers/auth.helper';
-
-const jwtHelper = new JwtHelperService();
 
 export interface State {
   user: User;
@@ -35,6 +32,7 @@ export function reducer(state: State | undefined, action: Action) {
 
 function handleResponse(response, state) {
   authHelper.processJwt(response.token);
+  authHelper.savePubicKey(response.publicKey);
   return ({ ...state, user: authHelper.getUser(), loggedIn: true, hasError: false, isLoading: false });
 }
 

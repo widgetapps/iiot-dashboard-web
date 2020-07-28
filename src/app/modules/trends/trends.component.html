@@ -1,17 +1,67 @@
-<p>trends works!</p>
+<mat-drawer-container class="example-container"  hasBackdrop="false">
+  <mat-drawer #drawer mode="over">
+    <form name="assetform">
+      <mat-form-field >
+        <input matInput type="text" placeholder="Filter tags" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
+        <mat-label>Filter tags</mat-label>
+        <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button (click)="getTrends(); drawer.toggle()" color="primary">View Trends</button>
+      </div>
 
+      <div class="selectedTags">
+        <button mat-button *ngFor="let tag of selectedTags" (click)="removeTag(tag)">
+          {{tag}} <mat-icon aria-label="Example icon-button">highlight_off</mat-icon>
+        </button>
+      </div>
 
-<div style="display: block">
-  <canvas baseChart height="100"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          [plugins]="lineChartPlugins"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-</div>
+      <div class="tagList">
+        <mat-card *ngFor="let tag of tags$ | async | tagFilter: searchText">
+          <mat-card-title>{{tag.location}}_{{tag._id}}</mat-card-title>
+          <mat-card-content>
+            <button mat-button *ngFor="let sensor of tag.sensors" (click)="addTag(tag.location, tag._id, sensor)">
+              {{sensor}} <mat-icon aria-label="Example icon-button">add_circle_outline</mat-icon>
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-<a (click)="getTrends()">Get Trands!</a>
+    </form>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-card class="login-card">
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart height="100"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+        <div>
+          <button mat-raised-button (click)="drawer.toggle()" color="primary">Select tags</button>
+          <mat-form-field>
+            <mat-select [(value)]="selectedDateOption" [(ngModel)]="activeDateOption" (ngModelChange)="updateDateRange($event)">
+              <mat-option *ngFor="let option of dateOptions" [value]="option.value">
+                {{option.viewValue}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+          <button mat-icon-button *ngIf="activeDateOption==='5'">
+            <mat-icon aria-label="Edit custom date">edit</mat-icon>
+          </button>
+          {{startDateString}} to {{endDateString}}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-drawer-content>
+</mat-drawer-container>

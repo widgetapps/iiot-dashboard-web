@@ -1,5 +1,6 @@
 import { createAction, props, union } from '@ngrx/store';
 import { TelemetrySummary } from "../../../shared/models/telemetrysummary.model";
+import { TagGroup } from "../../../shared/models/taggroup.model";
 
 export const getTrends = createAction (
   '[Trends] Get Trends',
@@ -11,9 +12,21 @@ export const getTrendsSuccess = createAction (
   props<{data: TelemetrySummary[]}>()
 )
 
+export const getTags = createAction (
+  '[Trends] Get Tags',
+  props<{ clientId: string }>()
+);
+
+export const getTagsSuccess = createAction (
+  '[Trends] Get Tags Success',
+  props<{data: TagGroup[]}>()
+)
+
 const all = union({
   getTrends,
-  getTrendsSuccess
+  getTrendsSuccess,
+  getTags,
+  getTagsSuccess
 });
 
 export type TrendsActionsUnion = typeof all;

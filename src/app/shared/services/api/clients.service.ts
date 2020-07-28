@@ -4,8 +4,9 @@ import {
 } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from "../../../../environments/environment";
-import {Device} from "../../models";
-import {TelemetrySummary} from "../../models/telemetrysummary.model";
+import { Device } from "../../models";
+import { TelemetrySummary } from "../../models/telemetrysummary.model";
+import { TagGroup } from "../../models/taggroup.model";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -43,5 +44,9 @@ export class ClientsService {
   getSummaryTelemetry(clientId: string, start: string, end: string, tags: string, interval: string) {
     return this.http.get<TelemetrySummary[]>(`${this.baseUrl}/${clientId}/telemetries/summary?` +
       `start=${start}&end=${end}&tags=${tags}&interval=${interval}`);
+  }
+
+  getTagList(clientId: string) {
+    return this.http.get<TagGroup[]>(`${this.baseUrl}/${clientId}/tags/grouped`, httpOptions);
   }
 }

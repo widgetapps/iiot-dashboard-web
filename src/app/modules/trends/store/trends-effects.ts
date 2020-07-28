@@ -9,7 +9,7 @@ import { ClientsService } from '../../../shared/services/api';
 import {
   TrendsActionsUnion,
   getTrends,
-  getTrendsSuccess
+  getTrendsSuccess, getTags, getTagsSuccess
 } from './trends-actions';
 import { Store } from "@ngrx/store";
 import { EMPTY } from 'rxjs';
@@ -37,6 +37,14 @@ export class TrendsEffects {
     ),
   ));
 
+  getTags$ = createEffect(() => this.actions$.pipe(
+    ofType(getTags),
+    switchMap(props => this.clientsService.getTagList(props.clientId)
+      .pipe(
+        map(data => getTagsSuccess({data}))
+      ))
+    )
+  );
 
   constructor(
     private actions$: Actions<TrendsActionsUnion>,

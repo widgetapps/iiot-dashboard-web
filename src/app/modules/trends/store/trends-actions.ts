@@ -22,11 +22,16 @@ export const getTagsSuccess = createAction (
   props<{data: TagGroup[]}>()
 )
 
+export const clearTrends = createAction(
+  '[Trends] Clear All'
+);
+
 const all = union({
   getTrends,
   getTrendsSuccess,
   getTags,
-  getTagsSuccess
+  getTagsSuccess,
+  clearTrends
 });
 
 export type TrendsActionsUnion = typeof all;

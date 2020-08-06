@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../store'
-import { login } from './store/actions';
+import { login, logout } from './store/actions';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import {clearClients, getAll} from "../../../modules/clients/store/clients-actions";
+import { clearTrends } from "../../../modules/trends/store/trends-actions";
 
 @Component({
   selector: 'app-login',
@@ -33,6 +35,9 @@ export class LoginComponent implements OnInit {
     });
 
     // reset login status
+    this.store.dispatch(logout());
+    this.store.dispatch(clearClients());
+    this.store.dispatch(clearTrends());
 
     // get return url from route parameters or default to '/dashboard'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
@@ -43,7 +48,7 @@ export class LoginComponent implements OnInit {
 
   authenticate(email: string, password: string) {
     this.store.dispatch(login({ email: email, password: password }));
-    //this.router.navigate(['/']);
+    //this.router.navigateByUrl('/dashboard');
   }
 
   openSnackBar(message: string) {

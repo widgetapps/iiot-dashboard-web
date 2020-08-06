@@ -27,7 +27,7 @@ export class ClientsEffects {
     startWith(getAll()),
     switchMap(() => this.clientsService.getClients().pipe(
       map(clients => getAllSuccess({clients}))
-    )),
+    ))
   ));
 
   constructor(

@@ -11,7 +11,7 @@
     <div fxHide.gt-xs>
       <a routerLink="/"><img class="logo" alt="logo" src="assets/img/DAPAGEE-Logo-Word-White.svg" width="150" ></a>
     </div>
-    <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="currentUser">
+    <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="user$ | async">
       <div>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
           <li>
@@ -62,16 +62,16 @@
         </ul>
       </div>
     </div>
-    <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="!(currentUser)">
+    <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="!(user$ | async)">
       <ul fxLayout fxLayoutGap="15px" class="navigation-items">
         <li>
-          <a routerLink="/login"><mat-icon>account_circle</mat-icon></a>
+          <a routerLink="/login"><mat-icon>login</mat-icon></a>
         </li>
       </ul>
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row class="header-row-client">
-    <div fxHide.xs *ngIf="currentUser">
+    <div fxHide.xs *ngIf="user$ | async">
       <ul fxLayout fxLayoutGap="15px" class="navigation-items">
         <li>
           <a routerLink="/dashboard">Dashboard</a>
@@ -82,7 +82,7 @@
       </ul>
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end">
-      <app-client-selector [clients]="clients$ | async"></app-client-selector>
+      <app-client-selector *ngIf="user$ | async" [clients]="clients$ | async"></app-client-selector>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

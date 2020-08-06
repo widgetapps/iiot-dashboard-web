@@ -7,25 +7,30 @@ export interface AppState {
   auth: fromAuth.State;
 }
 
-export const selectUser = createFeatureSelector<AppState, fromUser.State>('user');
-export const selectAuth = createFeatureSelector<AppState, fromAuth.State>('auth');
+export const userSelector = createFeatureSelector<AppState, fromUser.State>('user');
+export const authSelector = createFeatureSelector<AppState, fromAuth.State>('auth');
+
+export const selectUser = createSelector(
+  userSelector,
+  (state: fromUser.State) => state.user
+);
 
 export const selectUserId = createSelector(
-  selectUser,
+  userSelector,
   (state: fromUser.State) => state.user._id
 );
 
 export const selectClientId = createSelector(
-  selectUser,
+  userSelector,
   (state: fromUser.State) => state.user.client
 );
 
 export const selectApiKey = createSelector(
-  selectUser,
+  userSelector,
   (state: fromUser.State) => state.user.apiKey
 );
 
 export const selectToken = createSelector(
-  selectAuth,
+  authSelector,
   (state: fromAuth.State) => state.auth.token
 )

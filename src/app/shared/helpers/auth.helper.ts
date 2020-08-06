@@ -21,6 +21,12 @@ export function getJwt() {
   return localStorage.getItem('jwt');
 }
 
+export function logout() {
+  localStorage.removeItem('currentUser');
+  localStorage.removeItem('jwt');
+  localStorage.removeItem('publicKey');
+}
+
 export function getUser() {
   const user: User = JSON.parse(localStorage.getItem('currentUser'));
   return user;

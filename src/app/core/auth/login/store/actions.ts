@@ -17,6 +17,10 @@ export const authSuccess = createAction(
   props<{ response: Auth }>()
 );
 
+export const logout = createAction(
+  '[Login Page] Logout'
+);
+
 export const loginError = createAction(
   '[Login API] Login Error',
   props<{ message: string }>()
@@ -25,6 +29,7 @@ export const loginError = createAction(
 const all = union({
   login,
   loginSuccess,
+  authSuccess,
   loginError
 });
 

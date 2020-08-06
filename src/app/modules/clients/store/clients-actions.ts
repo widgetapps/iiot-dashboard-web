@@ -20,6 +20,10 @@ export const failure = createAction(
   props<{err: {concern: 'CREATE' | 'PATCH', error: any}}>()
 );
 
+export const clearClients = createAction(
+  '[Clients] Clear All'
+);
+
 const all = union({
   getAll,
   getAllSuccess,

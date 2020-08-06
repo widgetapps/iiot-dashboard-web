@@ -1,7 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { getTags, getTagsSuccess, getTrends, getTrendsSuccess } from './trends-actions';
+import { clearTrends, getTags, getTagsSuccess, getTrends, getTrendsSuccess } from './trends-actions';
 import { TelemetrySummary } from "../../../shared/models";
-import {TagGroup } from "../../../shared/models";
+import { TagGroup } from "../../../shared/models";
+import {clientsAdapter} from "../../clients/store/clients-reducer";
 
 export interface State {
   telemetry: TelemetrySummary[];
@@ -25,7 +26,8 @@ const trendsReducer = createReducer(initialState,
   on(getTrends, state => ({ ...state, telemetry: state.telemetry })),
   on(getTrendsSuccess, (state, { data }) => ({ ...state, telemetry: data, hasError: false, isLoading: false })),
   on(getTags, state => ({...state, tags: state.tags})),
-  on(getTagsSuccess, (state, { data }) => ({ ...state, tags: data, hasError: false, isLoading: false }))
+  on(getTagsSuccess, (state, { data }) => ({ ...state, tags: data, hasError: false, isLoading: false })),
+  on(clearTrends, state => ({ ...state, tags: null, telemetry: null }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

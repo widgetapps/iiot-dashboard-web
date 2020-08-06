@@ -7,6 +7,7 @@ import { environment } from "../../../../environments/environment";
 import { Device } from "../../models";
 import { TelemetrySummary } from "../../models/telemetrysummary.model";
 import { TagGroup } from "../../models/taggroup.model";
+import { ClientModel } from "../../models/client.model";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,7 +23,7 @@ export class ClientsService {
   constructor(private http: HttpClient) { }
 
   getClients() {
-
+    return this.http.get<ClientModel[]>(`${this.baseUrl}`, httpOptions);
   }
 
   getClient(clientId: string) {

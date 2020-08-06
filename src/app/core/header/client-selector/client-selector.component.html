@@ -1,3 +1,10 @@
-<div>
-  Client Name
+<div *ngIf="clients.length>0; else loading">
+  <mat-form-field>
+    <mat-select>
+      <mat-option *ngFor="let client of clients" value="{{client._id}}">{{client.companyName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
+<ng-template #loading>
+  Loading clients...
+</ng-template>

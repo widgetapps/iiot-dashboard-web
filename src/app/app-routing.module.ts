@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'account', loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule), canActivate: [AuthGuard] },
   { path: 'alerts', loadChildren: () => import('./modules/alerts/alerts.module').then(m => m.AlertsModule), canActivate: [AuthGuard] },
   { path: 'assets', loadChildren: () => import('./modules/assets/assets.module').then(m => m.AssetsModule), canActivate: [AuthGuard] },
+  { path: 'clients', loadChildren: () => import('./modules/clients/clients.module').then(m => m.ClientsModule), canActivate: [AuthGuard] },
   { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard] },
   { path: 'devices', loadChildren: () => import('./modules/devices/devices.module').then(m => m.DevicesModule), canActivate: [AuthGuard] },
   { path: 'locations', loadChildren: () => import('./modules/locations/locations.module').then(m => m.LocationsModule), canActivate: [AuthGuard] },

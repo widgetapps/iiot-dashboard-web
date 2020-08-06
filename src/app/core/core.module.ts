@@ -19,7 +19,12 @@ import { MatInputModule} from "@angular/material/input";
 
 import { StoreModule } from '@ngrx/store';
 import * as fromLogin from './auth/login/store/reducer';
+import * as fromClients from '../modules/clients/store/clients-reducer';
 import { AuthenticationService } from "../shared/services/authentication.service";
+import {ClientsStoreFacade} from "../modules/clients/store/clients-store-facade";
+import {MatSelectModule} from "@angular/material/select";
+import {EffectsModule} from "@ngrx/effects";
+import {ClientsEffects} from "../modules/clients/store/clients-effects";
 
 @NgModule({
   declarations: [HeaderComponent, ClientSelectorComponent, SidenavListComponent, LoginComponent, LogoutComponent],
@@ -41,8 +46,11 @@ import { AuthenticationService } from "../shared/services/authentication.service
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    StoreModule.forFeature(fromLogin.featureKey, fromLogin.reducer)
+    StoreModule.forFeature(fromLogin.featureKey, fromLogin.reducer),
+    StoreModule.forFeature(fromClients.featureKey, fromClients.reducer),
+    EffectsModule.forFeature([ClientsEffects]),
+    MatSelectModule
   ],
-  providers: [AuthenticationService]
+  providers: [ClientsStoreFacade, AuthenticationService]
 })
 export class CoreModule { }

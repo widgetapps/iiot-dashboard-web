@@ -20,6 +20,10 @@
                 <mat-icon>add_alert</mat-icon>
                 <span>Manage Alerts</span>
               </button>
+              <button mat-menu-item routerLink="/clients">
+                <mat-icon>corporate_fare</mat-icon>
+                <span>Manage Clients</span>
+              </button>
               <button mat-menu-item routerLink="/users">
                 <mat-icon>people</mat-icon>
                 <span>Manage Users</span>
@@ -78,7 +82,7 @@
       </ul>
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end">
-      <app-client-selector></app-client-selector>
+      <app-client-selector [clients]="clients$ | async"></app-client-selector>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -1,4 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ClientsStoreFacade } from "../../modules/clients/store/clients-store-facade";
+import { ClientModel } from "../../shared/models";
 
 @Component({
   selector: 'app-header',
@@ -7,8 +9,10 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   currentUser;
+  clients$ = this.clientsFacade.clients$;
+  clientsTrackByFn = (index: number, client: ClientModel) => client._id;
 
-  constructor() { }
+  constructor(private clientsFacade: ClientsStoreFacade) { }
 
   @Output() public sidenavToggle = new EventEmitter();
 

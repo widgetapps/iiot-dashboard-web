@@ -3,7 +3,6 @@ import { Device } from "../../shared/models";
 import { DevicesStoreFacade } from "./store/store-facade";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store";
-import { getAll } from "./store/actions";
 
 @Component({
   selector: 'app-devices',

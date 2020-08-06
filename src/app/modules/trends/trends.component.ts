@@ -104,14 +104,13 @@ export class TrendsComponent implements OnInit, OnDestroy {
           return sensorString;
         },
         label: (tooltipItem, data) => {
-          return 'TAG: ' + data.datasets[tooltipItem.datasetIndex].label;
-          // var amount = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-          // var total = eval(data.datasets[tooltipItem.datasetIndex].data.join("+"));
-          // return amount + ' / ' + total + ' ( ' + parseFloat(amount * 100 / total).toFixed(2) + '% )';
+          return data.datasets[tooltipItem.datasetIndex].label;
+        },
+        afterTitle: (tooltipItem, data)  => {
+          return (parseFloat(tooltipItem[0].value).toFixed(3).toString());
         },
         footer: (tooltipItem, data)  => {
-          //return moment(data.labels[tooltipItem[0].index]).format('ddd, MMM D YYYY HH:mm:ss');
-          return moment().format('ddd, MMM D YYYY HH:mm:ss');
+          return (tooltipItem[0].label);
         }
       }
     }

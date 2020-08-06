@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {select, Store} from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 import * as fromRoot from "../../store";
 import {getTags, getTrends} from "./store/trends-actions";
 import { TrendsStoreFacade } from "./store/trends-store-facade";
@@ -8,10 +8,11 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as moment from 'moment';
 import 'moment-timezone';
-import {Observable, Subscription} from "rxjs";
-import {TrendsEffects} from "./store/trends-effects";
-import {TagGroup} from "../../shared/models/taggroup.model";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Observable, Subscription } from "rxjs";
+import { TrendsEffects } from "./store/trends-effects";
+import { TagGroup } from "../../shared/models";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { getSelectedClient } from "../clients/store";
 
 export interface DateOptions {
   value: string;
@@ -146,6 +147,8 @@ export class TrendsComponent implements OnInit, OnDestroy {
   public lineChartPlugins = [pluginAnnotations];
 
   public trendsSub;
+  public clientSub;
+  public clientId;
 
   public testClientId = '5e41f50d47504d03aeed10b8';
 
@@ -154,21 +157,25 @@ export class TrendsComponent implements OnInit, OnDestroy {
     private trendsEffects: TrendsEffects,
     private snackBar: MatSnackBar,
     private trendsStoreFacade: TrendsStoreFacade
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
+    this.clientSub = this.store.pipe(select(getSelectedClient)).subscribe((clientId) => {this.clientId = clientId});
+
     this.lineChartData = [
       { data: [0, 0], label: '' }
     ];
     this.lineChartLabels = ['0', '0'];
 
     this.trendsSub = this.trendsEffects.getTrends$.subscribe((data) => { this.handleTelemetryChange(data) });
-    this.store.dispatch(getTags({clientId: this.testClientId}));
+    this.store.dispatch(getTags({clientId: this.clientId}));
     this.tags$ = this.trendsStoreFacade.tags$;
   }
 
   ngOnDestroy() {
     this.trendsSub.unsubscribe();
+    this.clientSub.unsubscribe();
   }
 
   getTrends() {
@@ -179,7 +186,7 @@ export class TrendsComponent implements OnInit, OnDestroy {
       this.lineChartLabels = ['0', '0'];
       return;
     }
-    this.store.dispatch(getTrends({clientId: this.testClientId, start: this.startDateString, end: this.endDateString, tags: this.selectedTags.join(','), interval: this.telemetryInterval}));
+    this.store.dispatch(getTrends({clientId: this.clientId, start: this.startDateString, end: this.endDateString, tags: this.selectedTags.join(','), interval: this.telemetryInterval}));
   }
 
   removeTag(tag: string) {

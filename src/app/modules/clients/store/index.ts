@@ -1,14 +1,14 @@
 import * as fromClients from './clients-reducer';
-import {Action, combineReducers, createFeatureSelector, createSelector} from '@ngrx/store';
+import { Action, combineReducers, createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface ClientsState {
-  devices: fromClients.State;
+  clients: fromClients.State;
 }
 
 /** Provide reducers with AoT-compilation compliance */
 export function reducers(state: ClientsState | undefined, action: Action) {
   return combineReducers({
-    devices: fromClients.reducer
+    clients: fromClients.reducer
   })(state, action)
 }
 
@@ -17,21 +17,26 @@ export function reducers(state: ClientsState | undefined, action: Action) {
  * This is used for selecting feature states that are loaded eagerly or lazily.
  */
 
-export const getDevicesState = createFeatureSelector<fromClients.State>('clients');
+export const getClientsState = createFeatureSelector<fromClients.State>('clients');
+
+export const getSelectedClient = createSelector(
+  getClientsState,
+  fromClients.getSelected
+);
 
 export const selectClientIds = createSelector(
-  getDevicesState,
+  getClientsState,
   fromClients.selectClientIds // shorthand for usersState => fromUser.selectUserIds(usersState)
 );
 export const selectClientEntities = createSelector(
-  getDevicesState,
+  getClientsState,
   fromClients.selectClientEntities
 );
 export const selectAllClients = createSelector(
-  getDevicesState,
+  getClientsState,
   fromClients.selectAllClients
 );
 export const selectClientTotal = createSelector(
-  getDevicesState,
+  getClientsState,
   fromClients.selectClientTotal
 );

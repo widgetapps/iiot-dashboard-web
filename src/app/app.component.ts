@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as authHelper from './shared/helpers/auth.helper';
 import { Auth } from "./shared/models";
 import { Store } from "@ngrx/store";
-import {authSuccess} from "./core/auth/login/store/actions";
+import { authSuccess } from "./core/auth/login/store/actions";
 
 @Component({
   selector: 'app-root',

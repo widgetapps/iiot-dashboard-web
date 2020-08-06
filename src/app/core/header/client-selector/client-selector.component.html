@@ -1,6 +1,6 @@
 <div *ngIf="clients.length>0; else loading">
   <mat-form-field>
-    <mat-select>
+    <mat-select [value]="clientId" (selectionChange)="updateSelectedClient($event)">
       <mat-option *ngFor="let client of clients" value="{{client._id}}">{{client.companyName}}</mat-option>
     </mat-select>
   </mat-form-field>

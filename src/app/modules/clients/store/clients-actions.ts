@@ -8,7 +8,12 @@ export const getAll = createAction (
 export const getAllSuccess = createAction (
   '[Clients] Get All Success',
   props<{clients: ClientModel[]}>()
-)
+);
+
+export const setSelected = createAction (
+  '[Clients] Set Selected',
+  props<{client: string}>()
+);
 
 export const failure = createAction(
   '[Clients] Failure',
@@ -18,6 +23,7 @@ export const failure = createAction(
 const all = union({
   getAll,
   getAllSuccess,
+  setSelected,
   failure
 });
 

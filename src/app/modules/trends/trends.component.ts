@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from "@ngrx/store";
 import * as fromRoot from "../../store";
 import {getTags, getTrends} from "./store/trends-actions";
@@ -32,8 +32,8 @@ export class TrendsComponent implements OnInit, OnDestroy {
 
   searchText = '';
   public selectedTags = [];
-  public startDateString = this.defaultStartDate.toISOString();
-  public endDateString = this.defaultEndDate.toISOString();
+  public startDate = this.defaultStartDate;
+  public endDate = this.defaultEndDate;
   public telemetryInterval = '10m';
   public tags$: Observable<TagGroup[]>;
 
@@ -49,6 +49,7 @@ export class TrendsComponent implements OnInit, OnDestroy {
 
   public selectedDateOption = '1';
   public activeDateOption = '1';
+  public activeTelemetryDataValue = 'mean';
 
   public lineChartData: ChartDataSets[];
   public lineChartLabels: Label[];
@@ -186,7 +187,7 @@ export class TrendsComponent implements OnInit, OnDestroy {
       this.lineChartLabels = ['0', '0'];
       return;
     }
-    this.store.dispatch(getTrends({clientId: this.clientId, start: this.startDateString, end: this.endDateString, tags: this.selectedTags.join(','), interval: this.telemetryInterval}));
+    this.store.dispatch(getTrends({clientId: this.clientId, start: this.startDate.toISOString(), end: this.endDate.toISOString(), tags: this.selectedTags.join(','), interval: this.telemetryInterval, dataType: this.activeTelemetryDataValue}));
   }
 
   removeTag(tag: string) {
@@ -203,6 +204,11 @@ export class TrendsComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedTags.push(location + '_' + asset + '_' + sensor);
+  }
+
+  changeValue(event) {
+    this.activeTelemetryDataValue = event.value;
+    this.getTrends();
   }
 
   handleTelemetryChange(telemetries) {
@@ -226,6 +232,7 @@ export class TrendsComponent implements OnInit, OnDestroy {
 
     let datetz;
     let datetzString;
+    let telemetryDataValue;
 
     for (const telemetry of telemetries.data) {
 
@@ -239,7 +246,21 @@ export class TrendsComponent implements OnInit, OnDestroy {
         lineChartLabels.push(datetz);
       }
 
-      data[telemetry.tag].data.push(telemetry.data.summary.mean);
+      switch(this.activeTelemetryDataValue) {
+        case 'median':
+          telemetryDataValue = telemetry.data.summary.median;
+          break;
+        case 'min':
+          telemetryDataValue = telemetry.data.summary.min;
+          break;
+        case 'max':
+          telemetryDataValue = telemetry.data.summary.max;
+          break;
+        default:
+          telemetryDataValue = telemetry.data.summary.mean;
+      }
+
+      data[telemetry.tag].data.push(telemetryDataValue);
     }
 
     const lineChartData = [];
@@ -289,8 +310,8 @@ export class TrendsComponent implements OnInit, OnDestroy {
         break;
         */
     }
-    this.startDateString = startDate.toISOString();
-    this.endDateString = endDate.toISOString();
+    this.startDate = startDate;
+    this.endDate = endDate;
 
     this.getTrends();
   }

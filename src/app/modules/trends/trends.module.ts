@@ -19,6 +19,9 @@ import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { TrendsFilterPipe } from "./trends.filter.pipe";
 import {TrendsStoreFacade} from "./store/trends-store-facade";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {FlexModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import {TrendsStoreFacade} from "./store/trends-store-facade";
     MatIconModule,
     MatButtonModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonToggleModule,
+    MatToolbarModule,
+    FlexModule
   ],
   providers: [ TrendsStoreFacade, ClientsService ]
 })

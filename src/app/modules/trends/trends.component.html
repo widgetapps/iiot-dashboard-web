@@ -34,8 +34,21 @@
   <mat-drawer-content>
     <mat-card class="login-card">
       <mat-card-content>
-        <div style="display: block">
-          <canvas baseChart height="100"
+        <mat-toolbar flex>
+          <mat-toolbar-row>
+            <button mat-raised-button (click)="drawer.toggle()" color="primary">Select tags</button>
+            <div fxFlex fxLayout fxLayoutAlign="end">
+              <mat-button-toggle-group name="trendvalue" aria-label="Trend Value">
+                <mat-button-toggle (change)="changeValue($event)" checked="true" value="mean">Mean</mat-button-toggle>
+                <mat-button-toggle (change)="changeValue($event)" value="median">Median</mat-button-toggle>
+                <mat-button-toggle (change)="changeValue($event)" value="min">Min</mat-button-toggle>
+                <mat-button-toggle (change)="changeValue($event)" value="max">Max</mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+        <div class="chart-container">
+          <canvas baseChart
                   [datasets]="lineChartData"
                   [labels]="lineChartLabels"
                   [options]="lineChartOptions"
@@ -47,7 +60,6 @@
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
         <div>
-          <button mat-raised-button (click)="drawer.toggle()" color="primary">Select tags</button>
           <mat-form-field>
             <mat-select [(value)]="selectedDateOption" [(ngModel)]="activeDateOption" (ngModelChange)="updateDateRange($event)">
               <mat-option *ngFor="let option of dateOptions" [value]="option.value">
@@ -59,7 +71,7 @@
           <button mat-icon-button *ngIf="activeDateOption==='5'">
             <mat-icon aria-label="Edit custom date">edit</mat-icon>
           </button>
-          {{startDateString}} to {{endDateString}}
+          {{startDate | date: 'medium'}} to {{endDate | date: 'medium'}}
         </div>
       </mat-card-content>
     </mat-card>

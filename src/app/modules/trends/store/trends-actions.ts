@@ -1,10 +1,10 @@
 import { createAction, props, union } from '@ngrx/store';
-import { TelemetrySummary } from "../../../shared/models/telemetrysummary.model";
-import { TagGroup } from "../../../shared/models/taggroup.model";
+import { TelemetrySummary } from "../../../shared/models";
+import { TagGroup } from "../../../shared/models";
 
 export const getTrends = createAction (
   '[Trends] Get Trends',
-  props<{ clientId: string, start: string, end: string, tags: string, interval: string }>()
+  props<{ clientId: string, start: string, end: string, tags: string, interval: string, dataType: string }>()
 );
 
 export const getTrendsSuccess = createAction (

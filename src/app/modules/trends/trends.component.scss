@@ -1,7 +1,27 @@
+mat-sidenav-content {
+  height: 90%;
+}
+
 mat-drawer-container {
-  height: 100%;
+  height: 90%;
 }
 
 mat-drawer {
   padding: 0 20px 20px 20px;
+}
+
+mat-button-toggle {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.chart-container {
+  display: block;
+}
+
+.chart-container canvas {
+}
+
+mat-card-title {
+  font-size: 16px;
 }

@@ -53,3 +53,7 @@ app-header {
 .header-row-client {
   height: 40px !important;
 }
+
+.app-container, mat-sidenav-container {
+  min-height: 100%;
+}

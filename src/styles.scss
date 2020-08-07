@@ -9,10 +9,6 @@ body {
   font-family: Raleway, sans-serif;
 }
 
-.header-spacer {
-  height: 110px;
-}
-
 app-header {
   position: fixed;
   width: 100%;
@@ -28,12 +24,6 @@ app-header {
 
 .field-full-width {
   width: 100%;
-}
-
-@media(max-width: 600px){
-  .header-spacer {
-    height: 100px;
-  }
 }
 
 .header-row-client .mat-form-field-infix {

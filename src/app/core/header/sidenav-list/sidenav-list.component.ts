@@ -1,4 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { select, Store } from "@ngrx/store";
+import * as fromUser from "../../auth/login/store";
 
 @Component({
   selector: 'app-sidenav-list',
@@ -8,7 +10,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class SidenavListComponent implements OnInit {
   @Output() sidenavClose = new EventEmitter();
 
-  constructor() { }
+  user$ = this.store.pipe(select(fromUser.selectUser));
+
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }

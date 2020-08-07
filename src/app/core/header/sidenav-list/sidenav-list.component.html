@@ -1,4 +1,4 @@
-<mat-nav-list>
+<mat-nav-list *ngIf="user$ | async">
   <a mat-list-item routerLink="/dashboard" (click)="onSidenavClose()">
     <mat-icon>dashboard</mat-icon> <span class="nav-caption">Dashboard</span>
   </a>

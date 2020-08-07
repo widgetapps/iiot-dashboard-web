@@ -1,14 +1,16 @@
 <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
-<div class="header-spacer"></div>
-<div class="app-container" layout="row" layout-fill>
-  <mat-sidenav-container layout="row" layout-fill>
-    <mat-sidenav #sidenav role="navigation">
-      <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
-    </mat-sidenav>
-    <mat-sidenav-content flex>
-      <main layout="row" layout-fill>
-        <router-outlet></router-outlet>
-      </main>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+<div fxFill fxLayout="column">
+  <div fxFlex.xs="100px" fxFlex.gt-xs="110px" class="header-spacer"></div>
+  <div class="app-container" fxFlex fxFill>
+    <mat-sidenav-container fxFill>
+      <mat-sidenav #sidenav role="navigation">
+        <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+      </mat-sidenav>
+      <mat-sidenav-content fxFill>
+        <main fxFill>
+          <router-outlet></router-outlet>
+        </main>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {select, Store} from "@ngrx/store";
+import * as fromUser from "../../core/auth/login/store";
 
 @Component({
   selector: 'app-home',
@@ -6,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  user$ = this.store.pipe(select(fromUser.selectUser));
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }

@@ -12,6 +12,6 @@
   </mat-card-content>
   <mat-card-actions>
     <a mat-raised-button href="https://www.dapagee.com" color="primary">Learn More</a>
-    <button mat-button routerLink="/login">Login</button>
+    <button mat-button routerLink="/login" *ngIf="!(user$ | async)">Login</button>
   </mat-card-actions>
 </mat-card>

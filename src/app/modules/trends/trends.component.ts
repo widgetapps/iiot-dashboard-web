@@ -4,11 +4,11 @@ import * as fromRoot from "../../store";
 import {getTags, getTrends} from "./store/trends-actions";
 import { TrendsStoreFacade } from "./store/trends-store-facade";
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, BaseChartDirective, Label } from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import * as moment from 'moment';
 import 'moment-timezone';
-import { Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 import { TrendsEffects } from "./store/trends-effects";
 import { TagGroup } from "../../shared/models";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -55,8 +55,8 @@ export class TrendsComponent implements OnInit, OnDestroy {
   public lineChartLabels: Label[];
   public lineChartOptions: (ChartOptions) = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
       xAxes: [{
         type: 'time'
       }],
@@ -151,8 +151,6 @@ export class TrendsComponent implements OnInit, OnDestroy {
   public clientSub;
   public clientId;
 
-  public testClientId = '5e41f50d47504d03aeed10b8';
-
   constructor(
     private store: Store<fromRoot.State>,
     private trendsEffects: TrendsEffects,
@@ -222,6 +220,7 @@ export class TrendsComponent implements OnInit, OnDestroy {
       }
       data[tag] = {
         data: [],
+        fill: false,
         label: tag,
         yAxisID: yAxisId
       };

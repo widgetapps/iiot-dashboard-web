@@ -22,6 +22,7 @@ import {TrendsStoreFacade} from "./store/trends-store-facade";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {FlexModule} from "@angular/flex-layout";
+import {MatChipsModule} from "@angular/material/chips";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {FlexModule} from "@angular/flex-layout";
     MatInputModule,
     MatButtonToggleModule,
     MatToolbarModule,
-    FlexModule
+    FlexModule,
+    MatChipsModule
   ],
   providers: [ TrendsStoreFacade, ClientsService ]
 })

@@ -1,1 +1,22 @@
-<p>alerts works!</p>
+<mat-card>
+  <mat-card-title>Manage Alerts</mat-card-title>
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">alarm</mat-icon>
+          Alerts
+        </ng-template>
+        <app-alertlist></app-alertlist>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">group_work</mat-icon>
+          Alert Groups
+        </ng-template>
+        <app-alertgroups></app-alertgroups>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

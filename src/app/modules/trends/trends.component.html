@@ -13,9 +13,11 @@
       </div>
 
       <div class="selectedTags">
-        <button mat-button *ngFor="let tag of selectedTags" (click)="removeTag(tag)">
-          {{tag}} <mat-icon aria-label="Example icon-button">highlight_off</mat-icon>
-        </button>
+        <mat-chip-list aria-label="Selected tags">
+          <mat-chip *ngFor="let tag of selectedTags" (click)="removeTag(tag)">
+            {{tag}} <mat-icon aria-label="icon-button">highlight_off</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
       </div>
 
       <div class="tagList">

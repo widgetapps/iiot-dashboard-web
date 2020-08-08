@@ -1,9 +1,9 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ClientModel } from '../../../shared/models';
-import {select, Store} from "@ngrx/store";
-import {setSelected} from "../../../modules/clients/store/clients-actions";
-import {getTags} from "../../../modules/trends/store/trends-actions";
-import {getSelectedClient} from "../../../modules/clients/store";
+import { select, Store } from "@ngrx/store";
+import { setSelected } from "../../../modules/clients/store/clients-actions";
+import { getTags } from "../../../modules/trends/store/trends-actions";
+import { getSelectedClient } from "../../../modules/clients/store";
 
 @Component({
   selector: 'app-client-selector',

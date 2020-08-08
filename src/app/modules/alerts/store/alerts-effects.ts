@@ -14,14 +14,6 @@ import {
   updateAlertSuccess,
   removeAlert,
   removeAlertSuccess,
-  getAllAlertGroups,
-  getAllAlertGroupsSuccess,
-  createAlertGroup,
-  createAlertGroupSuccess,
-  updateAlertGroup,
-  updateAlertGroupSuccess,
-  removeAlertGroup,
-  removeAlertGroupSuccess,
   AlertsActionsUnion
 } from './alerts-actions';
 import { Store } from "@ngrx/store";
@@ -39,6 +31,27 @@ export class ClientsEffects {
     ofType(getAllAlerts),
     switchMap(props => this.clientsService.getAlerts(props.clientId).pipe(
       map(alerts => getAllAlertsSuccess({alerts}))
+    ))
+  ));
+
+  createAlert$ = createEffect(() => this.actions$.pipe(
+    ofType(createAlert),
+    switchMap(props => this.clientsService.postAlert(props.clientId, props.alert).pipe(
+      map(alert => createAlertSuccess({alert}))
+    ))
+  ));
+
+  updateAlert$ = createEffect( () => this.actions$.pipe(
+    ofType(updateAlert),
+    switchMap(props => this.clientsService.putAlert(props.clientId, props.alertId, props.alert).pipe(
+      map(alert => updateAlertSuccess({alert}))
+    ))
+  ));
+
+  removeAlert$ = createEffect(() => this.actions$.pipe(
+    ofType(removeAlert),
+    switchMap(props => this.clientsService.deleteAlert(props.clientId, props.alertId).pipe(
+      map(message => removeAlertSuccess({message}))
     ))
   ));
 

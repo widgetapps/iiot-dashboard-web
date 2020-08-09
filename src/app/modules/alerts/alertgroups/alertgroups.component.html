@@ -1,7 +1,7 @@
 <p>These are alert group</p>
 
-<div *ngIf="alertGroups$ | async; else loading">
-  <div *ngFor="let alertGroup of alertGroups$ | async; trackBy: alertGroupsTrackByFn">
+<div *ngIf="alertGroups; else loading">
+  <div *ngFor="let alertGroup of alertGroups; trackBy: alertGroupsTrackByFn">
     <div>Name: {{alertGroup.name}}</div>
   </div>
 </div>

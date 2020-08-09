@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertGroupsStoreFacade } from "./store/alertgroups-store-facade";
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import { AlertGroupModel } from "../../../shared/models";
 
 @Component({
   selector: 'app-alertgroups',
   templateUrl: './alertgroups.component.html',
-  styleUrls: ['./alertgroups.component.scss']
+  styleUrls: ['./alertgroups.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class AlertgroupsComponent implements OnInit {
 
-  alertGroups$ = this.alertGroupsFacade.alertGroups$;
+  @Input() alertGroups: AlertGroupModel[];
+
   alertGroupsTrackByFn = (index: number, alertGroup: AlertGroupModel) => alertGroup.code;
 
-  constructor(private alertGroupsFacade: AlertGroupsStoreFacade) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

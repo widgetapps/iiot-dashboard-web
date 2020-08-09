@@ -70,7 +70,7 @@ export class ClientsService {
   }
 
   getAlertGroups(clientId: string) {
-    return this.http.get<AlertModel[]>(`${this.baseUrl}/${clientId}/alertgrpoups`, httpOptions);
+    return this.http.get<AlertGroupModel[]>(`${this.baseUrl}/${clientId}/alertgrpoups`, httpOptions);
   }
 
   postAlertGroup(clientId: string, payload: AlertGroupModel) {
@@ -78,14 +78,14 @@ export class ClientsService {
   }
 
   getAlertGroup(clientId: string, code: string) {
-    return this.http.get<AlertModel[]>(`${this.baseUrl}/${clientId}/alertgrpoups/${code}`, httpOptions);
+    return this.http.get<AlertGroupModel>(`${this.baseUrl}/${clientId}/alertgrpoups/${code}`, httpOptions);
   }
 
   putAlertGroup(clientId: string, code: string, payload: AlertGroupModel) {
-    return this.http.put<AlertModel[]>(`${this.baseUrl}/${clientId}/alertgrpoups/${code}`, payload, httpOptions);
+    return this.http.put<AlertGroupModel>(`${this.baseUrl}/${clientId}/alertgrpoups/${code}`, payload, httpOptions);
   }
 
   deleteAlertGroup(clientId: string, code: string) {
-    return this.http.delete(`${this.baseUrl}/${clientId}/alertgrpoups/${code}`, httpOptions);
+    return this.http.delete<string>(`${this.baseUrl}/${clientId}/alertgrpoups/${code}`, httpOptions);
   }
 }

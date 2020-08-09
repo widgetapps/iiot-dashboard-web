@@ -1,1 +1,11 @@
-<p>alertgroups works!</p>
+<p>These are alert group</p>
+
+<div *ngIf="alertGroups$ | async; else loading">
+  <div *ngFor="let alertGroup of alertGroups$ | async; trackBy: alertGroupsTrackByFn">
+    <div>Name: {{alertGroup.name}}</div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div>loading devices...</div>
+</ng-template>

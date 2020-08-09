@@ -1,6 +1,6 @@
 import { createAction, props, union } from '@ngrx/store';
-import { AlertModel } from "../../../shared/models";
-import { AlertGroupModel } from "../../../shared/models";
+import { AlertModel } from "../../../../shared/models";
+import { AlertGroupModel } from "../../../../shared/models";
 
 // Alert actions
 export const getAllAlerts = createAction (

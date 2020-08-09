@@ -4,7 +4,7 @@ import {
   switchMap
 } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ClientsService } from '../../../shared/services/api';
+import { ClientsService } from '../../../../shared/services/api';
 import {
   getAllAlerts,
   getAllAlertsSuccess,
@@ -17,7 +17,7 @@ import {
   AlertsActionsUnion
 } from './alerts-actions';
 import { Store } from "@ngrx/store";
-import * as fromRoot from '../../../store'
+import * as fromRoot from '../../../../store'
 
 /**
  * Effects file is for isolating and managing side effects of the application in one place
@@ -25,7 +25,7 @@ import * as fromRoot from '../../../store'
  */
 
 @Injectable()
-export class ClientsEffects {
+export class AlertsEffects {
 
   getAllAlerts$ = createEffect( () => this.actions$.pipe(
     ofType(getAllAlerts),

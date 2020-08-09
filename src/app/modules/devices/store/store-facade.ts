@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as fromDevices from './index';
 import { select, Store } from '@ngrx/store';
-import * as fromRoot from '../../../store'
-import { Device } from '../../../shared/models';
-//import {create, load, remove, update} from './actions';
+import * as fromRoot from '../../../store';
 
 @Injectable()
 export class DevicesStoreFacade {

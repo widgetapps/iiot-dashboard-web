@@ -8,7 +8,17 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatIconModule} from "@angular/material/icon";
 import { AlertlistComponent } from './alertlist/alertlist.component';
 import { AlertgroupsComponent } from './alertgroups/alertgroups.component';
+import { StoreModule } from "@ngrx/store";
 
+import { EffectsModule } from "@ngrx/effects";
+import { AlertsEffects } from "./alertlist/store/alerts-effects";
+import { AlertGroupsEffects } from "./alertgroups/store/alertgroups-effects";
+
+import * as fromAlerts from './alertlist/store/alerts-reducer';
+import * as fromAlertGroups from './alertgroups/store/alertgroups-reducer';
+import { AlertsStoreFacade } from "./alertlist/store/alerts-store-facade";
+import { AlertGroupsStoreFacade } from "./alertgroups/store/alertgroups-store-facade";
+import { ClientsService } from "../../shared/services/api";
 
 @NgModule({
   declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent],
@@ -17,7 +27,11 @@ import { AlertgroupsComponent } from './alertgroups/alertgroups.component';
     AlertsRoutingModule,
     MatCardModule,
     MatTabsModule,
-    MatIconModule
-  ]
+    MatIconModule,
+    StoreModule.forFeature(fromAlertGroups.featureKey, fromAlertGroups.reducer),
+    StoreModule.forFeature(fromAlerts.featureKey, fromAlerts.reducer),
+    EffectsModule.forFeature([AlertsEffects, AlertGroupsEffects])
+  ],
+  providers: [AlertsStoreFacade, AlertGroupsStoreFacade, ClientsService]
 })
 export class AlertsModule { }

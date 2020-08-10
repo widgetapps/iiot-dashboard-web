@@ -1,4 +1,4 @@
-export class TagGroup {
+export class TagGroupModel {
   _id: string;
   location: string;
   description: string;

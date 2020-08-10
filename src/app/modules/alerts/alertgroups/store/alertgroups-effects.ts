@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  map,
+  map, startWith,
   switchMap
 } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -18,6 +18,7 @@ import {
 } from './alertgroups-actions';
 import { Store } from "@ngrx/store";
 import * as fromRoot from '../../../../store'
+import * as authHelper from '../../../../shared/helpers/auth.helper';
 
 /**
  * Effects file is for isolating and managing side effects of the application in one place
@@ -29,6 +30,7 @@ export class AlertGroupsEffects {
 
   getAllAlertGroups$ = createEffect( () => this.actions$.pipe(
     ofType(getAllAlertGroups),
+    startWith(getAllAlertGroups({clientId: authHelper.getUser().client})),
     switchMap(props => this.clientsService.getAlertGroups(props.clientId).pipe(
       map(alertGroups => getAllAlertGroupsSuccess({alertGroups}))
     ))

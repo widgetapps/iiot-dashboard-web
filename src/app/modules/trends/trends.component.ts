@@ -10,7 +10,7 @@ import * as moment from 'moment';
 import 'moment-timezone';
 import { Observable } from "rxjs";
 import { TrendsEffects } from "./store/trends-effects";
-import { TagGroup } from "../../shared/models";
+import { TagGroupModel } from "../../shared/models";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { getSelectedClient } from "../clients/store";
 
@@ -35,7 +35,7 @@ export class TrendsComponent implements OnInit, OnDestroy {
   public startDate = this.defaultStartDate;
   public endDate = this.defaultEndDate;
   public telemetryInterval = '10m';
-  public tags$: Observable<TagGroup[]>;
+  public tags$: Observable<TagGroupModel[]>;
 
   dateOptions: DateOptions[] = [
     {value: '0', viewValue: 'Yesterday'},

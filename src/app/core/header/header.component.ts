@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ClientsStoreFacade } from "../../modules/clients/store/clients-store-facade";
 import * as fromUser from '../auth/login/store'
-import {select, Store} from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,6 @@ import {select, Store} from "@ngrx/store";
 export class HeaderComponent implements OnInit {
   clients$ = this.clientsFacade.clients$;
   user$ = this.store.pipe(select(fromUser.selectUser));
-  //clientsTrackByFn = (index: number, client: ClientModel) => client._id;
 
   constructor(
     private clientsFacade: ClientsStoreFacade,

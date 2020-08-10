@@ -1,5 +1,5 @@
 import { createAction, props, union } from '@ngrx/store';
-import { Device } from "../../../shared/models";
+import { DeviceModel } from "../../../shared/models";
 
 export const getAll = createAction (
   '[Devices] Get All',
@@ -8,7 +8,7 @@ export const getAll = createAction (
 
 export const getAllSuccess = createAction (
   '[Devices] Get All Success',
-  props<{devices: Device[]}>()
+  props<{devices: DeviceModel[]}>()
 )
 
 export const failure = createAction(

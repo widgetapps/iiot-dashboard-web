@@ -1,4 +1,4 @@
-import * as fromDevices from './reducer';
+import * as fromDevices from './devices-reducer';
 import {Action, combineReducers, createFeatureSelector, createSelector} from '@ngrx/store';
 
 export interface DevicesState {

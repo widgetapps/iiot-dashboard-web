@@ -1,17 +1,17 @@
-import { Device } from '../../../shared/models';
+import { DeviceModel } from '../../../shared/models';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import {
   getAllSuccess
-} from './actions';
+} from './devices-actions';
 
 // This adapter will allow is to manipulate contacts (mostly CRUD operations)
-export const devicesAdapter = createEntityAdapter<Device>({
-  selectId: (device: Device) => device._id,
+export const devicesAdapter = createEntityAdapter<DeviceModel>({
+  selectId: (device: DeviceModel) => device._id,
   sortComparer: false
 });
 
-export interface State extends EntityState<Device> {
+export interface State extends EntityState<DeviceModel> {
   // additional props here
 }
 

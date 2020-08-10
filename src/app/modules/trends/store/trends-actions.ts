@@ -1,6 +1,6 @@
 import { createAction, props, union } from '@ngrx/store';
-import { TelemetrySummary } from "../../../shared/models";
-import { TagGroup } from "../../../shared/models";
+import { TelemetrySummaryModel } from "../../../shared/models";
+import { TagGroupModel } from "../../../shared/models";
 
 export const getTrends = createAction (
   '[Trends] Get Trends',
@@ -9,7 +9,7 @@ export const getTrends = createAction (
 
 export const getTrendsSuccess = createAction (
   '[Trends] Get Trends Success',
-  props<{data: TelemetrySummary[]}>()
+  props<{data: TelemetrySummaryModel[]}>()
 )
 
 export const getTags = createAction (
@@ -19,7 +19,7 @@ export const getTags = createAction (
 
 export const getTagsSuccess = createAction (
   '[Trends] Get Tags Success',
-  props<{data: TagGroup[]}>()
+  props<{data: TagGroupModel[]}>()
 )
 
 export const clearTrends = createAction(

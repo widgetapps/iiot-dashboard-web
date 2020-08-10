@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as authHelper from './shared/helpers/auth.helper';
-import { Auth } from "./shared/models";
+import { AuthModel } from "./shared/models";
 import { Store } from "@ngrx/store";
 import { authSuccess } from "./core/auth/login/store/actions";
 
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     const jwt: string = authHelper.getJwt();
     if (jwt) {
       const publicKey: string = authHelper.getPublicKey();
-      const authResponse: Auth = {
+      const authResponse: AuthModel = {
         message: 'Created on app init.',
         token: jwt,
         publicKey: publicKey

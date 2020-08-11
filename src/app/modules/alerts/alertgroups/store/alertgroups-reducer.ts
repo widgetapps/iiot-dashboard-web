@@ -4,7 +4,7 @@ import { createReducer, on } from '@ngrx/store';
 import {
   createAlertGroupSuccess,
   getAllAlertGroupsSuccess,
-  removeAlertGroupSuccess
+  removeAlertGroupSuccess, updateAlertGroupSuccess
 } from './alertgroups-actions';
 
 export const alertGroupsAdapter = createEntityAdapter<AlertGroupModel>({
@@ -26,7 +26,8 @@ export const reducer = createReducer<State>(
   INIT_STATE,
   on(getAllAlertGroupsSuccess, (state, {alertGroups}) => alertGroupsAdapter.setAll(alertGroups, state)),
   on(createAlertGroupSuccess, (state, {alertGroup}) => alertGroupsAdapter.addOne(alertGroup, state)),
-  on(removeAlertGroupSuccess, (state, {response}) => alertGroupsAdapter.removeOne(response.code, state))
+  on(removeAlertGroupSuccess, (state, {response}) => alertGroupsAdapter.removeOne(response.code, state)),
+  on(updateAlertGroupSuccess, (state, {alertGroup}) => alertGroupsAdapter.updateOne({id: alertGroup.code, changes: alertGroup}, state))
 );
 
 // get the selectors
@@ -48,3 +49,5 @@ export const selectAllAlertGroups = selectAll;
 
 // select the total device count
 export const selectAlertGroupTotal = selectTotal;
+
+export const getAlertGroupById = (id: string) => (state: State) => state.entities[id];

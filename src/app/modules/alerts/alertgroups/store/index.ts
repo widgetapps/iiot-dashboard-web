@@ -30,3 +30,8 @@ export const selectAlertGroupTotal = createSelector(
   getAlertGroupsState,
   fromAlertGroups.selectAlertGroupTotal
 );
+
+export const getAlertGroupById = (id: string) => createSelector(
+  getAlertGroupsState,
+  fromAlertGroups.getAlertGroupById(id)
+);

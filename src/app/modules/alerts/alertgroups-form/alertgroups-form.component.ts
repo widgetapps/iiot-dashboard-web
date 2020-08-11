@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AlertGroupModel } from "../../../shared/models";
 
@@ -7,35 +7,66 @@ import { AlertGroupModel } from "../../../shared/models";
   templateUrl: './alertgroups-form.component.html',
   styleUrls: ['./alertgroups-form.component.scss']
 })
-export class AlertgroupsFormComponent implements OnInit {
+export class AlertgroupsFormComponent implements OnInit, OnChanges {
 
-  alertgroupsForm = this.fb.group({
-    code: [''],
-    name: ['', Validators.required],
-    contacts: this.fb.array([
-      this.fb.group( {
-        name: ['Test'],
-        sms: this.fb.group({
-          send: [false],
-          number: ['']
-        }),
-        email: this.fb.group({
-          send: [false],
-          address: ['']
-        })
-      })
-    ])
-  });
+  @Input() alertGroupData: AlertGroupModel = {
+    code: '',
+    name: '',
+    contacts: [{
+      name: '',
+      sms: {
+        send: false,
+        number: ''
+      },
+      email: {
+        send: false,
+        address: ''
+      }
+    }]
+  };
+
+  alertgroupsForm: FormGroup;
 
   get contacts() {
     return this.alertgroupsForm.get('contacts') as FormArray;
   }
 
   @Output() save = new EventEmitter<AlertGroupModel>();
+  private groupContacts: FormArray;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    this.alertgroupsForm = this.fb.group({
+      code: [this.alertGroupData.code],
+      name: [this.alertGroupData.name, Validators.required],
+      contacts: this.fb.array([])
+    });
+  }
+
+  createContactForForm(contact) {
+    return this.fb.group( {
+      name: [contact.name],
+      sms: this.fb.group({
+        send: [contact.sms.send],
+        number: [contact.sms.number]
+      }),
+      email: this.fb.group({
+        send: [contact.email.send],
+        address: [contact.email.address]
+      })
+    })
+  }
 
   ngOnInit(): void {
+    this.groupContacts = this.contacts;
+    for (let c of this.alertGroupData.contacts) {
+      this.groupContacts.push(this.createContactForForm(c));
+    }
+  }
+
+  ngOnChanges() {
+    if (this.alertGroupData) {
+      this.alertgroupsForm.patchValue({...this.alertGroupData});
+    }
   }
 
   addContactRow() {

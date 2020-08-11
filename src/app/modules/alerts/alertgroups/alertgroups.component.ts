@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { AlertGroupModel } from "../../../shared/models";
 import { AlertGroupsStoreFacade } from "./store/alertgroups-store-facade";
 import * as authHelper from '../../../shared/helpers/auth.helper';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-alertgroups',
@@ -17,7 +18,8 @@ export class AlertgroupsComponent implements OnInit {
   alertGroupsTrackByFn = (index: number, alertGroup: AlertGroupModel) => alertGroup.code;
 
   constructor(
-    private alertGroupsFacade: AlertGroupsStoreFacade
+    private alertGroupsFacade: AlertGroupsStoreFacade,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class AlertgroupsComponent implements OnInit {
   }
 
   editAlertGroup(code: string) {
-
+    this.router.navigate(['/alerts/group', code, 'edit']);
   }
 
 }

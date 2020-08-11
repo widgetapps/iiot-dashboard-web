@@ -23,3 +23,7 @@ mat-sidenav-container, mat-sidenav-content {
 mat-sidenav {
   width: 250px;
 }
+
+::ng-deep .mat-checkbox {
+  margin-right: 10px !important;
+}

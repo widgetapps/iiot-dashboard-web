@@ -19,9 +19,19 @@ import * as fromAlertGroups from './alertgroups/store/alertgroups-reducer';
 import { AlertsStoreFacade } from "./alertlist/store/alerts-store-facade";
 import { AlertGroupsStoreFacade } from "./alertgroups/store/alertgroups-store-facade";
 import { ClientsService } from "../../shared/services/api";
+import { AlertgroupsFormComponent } from './alertgroups-form/alertgroups-form.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { AlertgroupsNewComponent } from './alertgroups-new/alertgroups-new.component';
+import { AlertgroupsEditComponent } from './alertgroups-edit/alertgroups-edit.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDividerModule} from "@angular/material/divider";
+import {FlexModule} from "@angular/flex-layout";
 
 @NgModule({
-  declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent],
+  declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent, AlertgroupsFormComponent, AlertgroupsNewComponent, AlertgroupsEditComponent],
   imports: [
     CommonModule,
     AlertsRoutingModule,
@@ -30,7 +40,14 @@ import { ClientsService } from "../../shared/services/api";
     MatIconModule,
     StoreModule.forFeature(fromAlertGroups.featureKey, fromAlertGroups.reducer),
     StoreModule.forFeature(fromAlerts.featureKey, fromAlerts.reducer),
-    EffectsModule.forFeature([AlertsEffects, AlertGroupsEffects])
+    EffectsModule.forFeature([AlertsEffects, AlertGroupsEffects]),
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDividerModule,
+    FlexModule
   ],
   providers: [AlertsStoreFacade, AlertGroupsStoreFacade, ClientsService]
 })

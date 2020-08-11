@@ -1,0 +1,12 @@
+<mat-card class="card-add-edit">
+  <mat-card-title>
+    Add Alert Group
+  </mat-card-title>
+  <mat-card-content>
+    <app-alertgroups-form (save)="submitted($event)"></app-alertgroups-form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="newAlertGroup()" color="primary">Add Alert Group</button>
+    <button mat-button routerLink="/alerts">Cancel</button>
+  </mat-card-actions>
+</mat-card>

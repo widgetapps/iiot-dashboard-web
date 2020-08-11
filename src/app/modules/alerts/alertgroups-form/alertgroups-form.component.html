@@ -1,0 +1,59 @@
+<form [formGroup]="alertgroupsForm" (submit)="submit()">
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>Alert Group Code</mat-label>
+      <input matNativeControl type="text" placeholder="Code" formControlName="code">
+      <mat-hint>Choose a unique code identifier</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Alert Group Name</mat-label>
+      <input matNativeControl type="text" placeholder="Name" formControlName="name">
+      <mat-hint>Choose a name that represents the group</mat-hint>
+    </mat-form-field>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
+  <div formArrayName="contacts">
+    <h3>Contacts</h3>
+    <div fxLayout="column">
+      <div fxLayout.gt-xs="row" fxLayout.xs="column" *ngFor="let contact of contacts.controls; let i=index" [formGroupName]="i">
+        <div fxFlex>
+          <button mat-icon-button aria-label="Remove contact" (click)="removeContactRow(this.i)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          <mat-form-field>
+            <mat-label>Contact Name</mat-label>
+            <input matNativeControl type="text" placeholder="Contact name" formControlName="name">
+          </mat-form-field>
+        </div>
+        <div fxFlex formGroupName="email">
+          <mat-checkbox aria-label="Send to email" formControlName="send"></mat-checkbox>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matNativeControl type="email" placeholder="Email address" formControlName="address">
+          </mat-form-field>
+        </div>
+        <div fxFlex formGroupName="sms">
+          <mat-checkbox aria-label="Send to SMS" formControlName="send"></mat-checkbox>
+          <mat-form-field>
+            <mat-label>SMS</mat-label>
+            <input matNativeControl type="tel" placeholder="SMS number" formControlName="number">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <button mat-icon-button aria-label="Add contact" (click)="addContactRow()">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<p>
+  Form Value: {{ alertgroupsForm.value | json }}
+</p>
+<p>
+  Form Status: {{ alertgroupsForm.status }}
+</p>

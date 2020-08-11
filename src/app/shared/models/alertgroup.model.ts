@@ -11,7 +11,7 @@ export class AlertGroupModel {
       send: boolean;
       address: string;
     }
-    user: {
+    user?: {
       send: boolean;
       id: string;
     }

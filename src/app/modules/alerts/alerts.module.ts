@@ -29,9 +29,12 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {FlexModule} from "@angular/flex-layout";
+import { AlertFormComponent } from './alert-form/alert-form.component';
+import { AlertEditComponent } from './alert-edit/alert-edit.component';
+import { AlertNewComponent } from './alert-new/alert-new.component';
 
 @NgModule({
-  declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent, AlertgroupsFormComponent, AlertgroupsNewComponent, AlertgroupsEditComponent],
+  declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent, AlertgroupsFormComponent, AlertgroupsNewComponent, AlertgroupsEditComponent, AlertFormComponent, AlertEditComponent, AlertNewComponent],
   imports: [
     CommonModule,
     AlertsRoutingModule,

@@ -1,5 +1,6 @@
 export class AlertModel {
   _id: string;
+  name: string;
   assets: string[];
   sensor: string;
   alertGroupCodes: string[];

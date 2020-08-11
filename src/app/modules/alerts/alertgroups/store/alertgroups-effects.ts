@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  map, startWith,
+  map, pluck, startWith,
   switchMap
 } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -53,7 +53,7 @@ export class AlertGroupsEffects {
   removeAlertGroup$ = createEffect(() => this.actions$.pipe(
     ofType(removeAlertGroup),
     switchMap(props => this.clientsService.deleteAlertGroup(props.clientId, props.code).pipe(
-      map(message => removeAlertGroupSuccess({message}))
+      map(response => removeAlertGroupSuccess({response}))
     ))
   ));
 

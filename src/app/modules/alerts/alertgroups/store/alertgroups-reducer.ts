@@ -2,7 +2,9 @@ import { AlertGroupModel } from '../../../../shared/models';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import {
-  getAllAlertGroupsSuccess
+  createAlertGroupSuccess,
+  getAllAlertGroupsSuccess,
+  removeAlertGroupSuccess
 } from './alertgroups-actions';
 
 export const alertGroupsAdapter = createEntityAdapter<AlertGroupModel>({
@@ -22,7 +24,9 @@ export const featureKey = 'alertGroups';
 
 export const reducer = createReducer<State>(
   INIT_STATE,
-  on(getAllAlertGroupsSuccess, (state, {alertGroups}) => alertGroupsAdapter.setAll(alertGroups, state))
+  on(getAllAlertGroupsSuccess, (state, {alertGroups}) => alertGroupsAdapter.setAll(alertGroups, state)),
+  on(createAlertGroupSuccess, (state, {alertGroup}) => alertGroupsAdapter.addOne(alertGroup, state)),
+  on(removeAlertGroupSuccess, (state, {response}) => alertGroupsAdapter.removeOne(response.code, state))
 );
 
 // get the selectors

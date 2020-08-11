@@ -1,5 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AlertGroupModel } from "../../../shared/models";
+import { AlertGroupsStoreFacade } from "./store/alertgroups-store-facade";
+import * as authHelper from '../../../shared/helpers/auth.helper';
 
 @Component({
   selector: 'app-alertgroups',
@@ -14,9 +16,19 @@ export class AlertgroupsComponent implements OnInit {
 
   alertGroupsTrackByFn = (index: number, alertGroup: AlertGroupModel) => alertGroup.code;
 
-  constructor() { }
+  constructor(
+    private alertGroupsFacade: AlertGroupsStoreFacade
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  removeAlertGroup(code: string) {
+    this.alertGroupsFacade.deleteAlertGroup(authHelper.getUser().client, code);
+  }
+
+  editAlertGroup(code: string) {
+
   }
 
 }

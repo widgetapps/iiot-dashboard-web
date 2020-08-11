@@ -10,8 +10,8 @@ import { AlertGroupModel } from "../../../shared/models";
 export class AlertgroupsFormComponent implements OnInit {
 
   alertgroupsForm = this.fb.group({
-    code: ['g1', Validators.required],
-    name: [''],
+    code: [''],
+    name: ['', Validators.required],
     contacts: this.fb.array([
       this.fb.group( {
         name: ['Test'],
@@ -30,23 +30,6 @@ export class AlertgroupsFormComponent implements OnInit {
   get contacts() {
     return this.alertgroupsForm.get('contacts') as FormArray;
   }
-
-
-  @Input() alertGroup: AlertGroupModel = {
-    code: 'g1',
-    name: '',
-    contacts: [{
-      name: '',
-      sms: {
-        send: false,
-        number: ''
-      },
-      email: {
-        send: false,
-        address: ''
-      }
-    }]
-  };
 
   @Output() save = new EventEmitter<AlertGroupModel>();
 

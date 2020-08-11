@@ -39,7 +39,7 @@ export const removeAlertGroup = createAction(
 
 export const removeAlertGroupSuccess = createAction(
   '[Alert Groups] Remove Success',
-  props<{message: string}>()
+  props<{response: any}>()
 );
 
 export const failure = createAction(

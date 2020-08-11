@@ -16,7 +16,7 @@ export class AlertgroupsNewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  newAlertGroup() {
+  submit() {
     this.childForm.submit();
   }
 

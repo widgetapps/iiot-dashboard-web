@@ -32,9 +32,12 @@ import {FlexModule} from "@angular/flex-layout";
 import { AlertFormComponent } from './alert-form/alert-form.component';
 import { AlertEditComponent } from './alert-edit/alert-edit.component';
 import { AlertNewComponent } from './alert-new/alert-new.component';
+import {ChipAutocompleteComponent} from "../../shared/components/chip-autocomplete/chip-autocomplete.component";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
-  declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent, AlertgroupsFormComponent, AlertgroupsNewComponent, AlertgroupsEditComponent, AlertFormComponent, AlertEditComponent, AlertNewComponent],
+  declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent, AlertgroupsFormComponent, AlertgroupsNewComponent, AlertgroupsEditComponent, AlertFormComponent, AlertEditComponent, AlertNewComponent, ChipAutocompleteComponent, ChipAutocompleteComponent],
   imports: [
     CommonModule,
     AlertsRoutingModule,
@@ -50,7 +53,9 @@ import { AlertNewComponent } from './alert-new/alert-new.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatDividerModule,
-    FlexModule
+    FlexModule,
+    MatAutocompleteModule,
+    MatChipsModule
   ],
   providers: [AlertsStoreFacade, AlertGroupsStoreFacade, ClientsService]
 })

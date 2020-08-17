@@ -1,1 +1,26 @@
-<p>alert-form works!</p>
+<form [formGroup]="alertForm" (submit)="submit()">
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>Alert Name</mat-label>
+      <input matNativeControl type="text" placeholder="Name" formControlName="name">
+      <mat-hint>Choose a name that describes the alert</mat-hint>
+    </mat-form-field>
+    <app-chip-autocomplete
+      placeholder="Alert groups"
+    [filteredItems$]="alertGroupsItems$"></app-chip-autocomplete>
+    <mat-form-field>
+      <mat-label>Sensor</mat-label>
+      <input matNativeControl type="text" placeholder="Sensor" formControlName="sensor">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row">
+    <mat-form-field>
+      <mat-label>Min</mat-label>
+      <input matNativeControl type="number" placeholder="Min" formControlName="min">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Max</mat-label>
+      <input matNativeControl type="number" placeholder="max" formControlName="max">
+    </mat-form-field>
+  </div>
+</form>

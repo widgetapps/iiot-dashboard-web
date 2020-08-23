@@ -37,7 +37,19 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
-  declarations: [AlertsComponent, AlertlistComponent, AlertgroupsComponent, AlertgroupsFormComponent, AlertgroupsNewComponent, AlertgroupsEditComponent, AlertFormComponent, AlertEditComponent, AlertNewComponent, ChipAutocompleteComponent, ChipAutocompleteComponent],
+  declarations: [
+    AlertsComponent,
+    AlertlistComponent,
+    AlertgroupsComponent,
+    AlertgroupsFormComponent,
+    AlertgroupsNewComponent,
+    AlertgroupsEditComponent,
+    AlertFormComponent,
+    AlertEditComponent,
+    AlertNewComponent,
+    ChipAutocompleteComponent,
+    ChipAutocompleteComponent
+  ],
   imports: [
     CommonModule,
     AlertsRoutingModule,

@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlertGroupModel, AlertModel } from "../../../shared/models";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AlertGroupsStoreFacade } from "../alertgroups/store/alertgroups-store-facade";
 import { ListItemModel } from "../../../shared/components/chip-autocomplete/models";
-import {Observable} from "rxjs";
-import {map, pluck} from "rxjs/internal/operators";
+import { Observable } from "rxjs";
+import { map, pluck } from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-alert-form',
@@ -12,6 +12,20 @@ import {map, pluck} from "rxjs/internal/operators";
   styleUrls: ['./alert-form.component.scss']
 })
 export class AlertFormComponent implements OnInit {
+
+  @Input() alertData: AlertModel = {
+    _id: '',
+    name: '',
+    assets: [],
+    sensor: '',
+    alertGroupCodes: [],
+    active: false,
+    frequencyMinute: 15,
+    limits: {
+      low: 0,
+      high: 10
+    }
+  };
 
   alertForm: FormGroup;
   alertGroupsItems$: Observable<ListItemModel[]>;
@@ -23,10 +37,12 @@ export class AlertFormComponent implements OnInit {
     private alertGroupsFacade: AlertGroupsStoreFacade
   ) {
     this.alertForm = this.fb.group({
-      name: [''],
-      sensor: ['', Validators.required],
-      min: [''],
-      max: ['']
+      name: [this.alertData.name],
+      sensor: [this.alertData.sensor, Validators.required],
+      assets: [this.alertData.assets],
+      alertGroups: [this.alertData.alertGroupCodes],
+      low: [this.alertData.limits.low],
+      high: [this.alertData.limits.high]
     });
   }
 

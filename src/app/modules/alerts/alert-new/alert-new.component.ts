@@ -22,6 +22,7 @@ export class AlertNewComponent implements OnInit {
   }
 
   submitted(alert: AlertModel) {
+    console.log(alert);
     //alertGroup.code = this.getAlertGroupCode(8);
     //this.alertGroupsFacade.createAlertGroup(authHelper.getUser().client, alertGroup);
     //this.router.navigate(['/alerts']);

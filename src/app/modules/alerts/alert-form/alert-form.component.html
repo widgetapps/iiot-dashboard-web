@@ -7,7 +7,12 @@
     </mat-form-field>
     <app-chip-autocomplete
       placeholder="Alert groups"
-    [filteredItems$]="alertGroupsItems$"></app-chip-autocomplete>
+      [filteredItems$]="alertGroupsItems$"
+      formControlName="alertGroups"></app-chip-autocomplete>
+    <app-chip-autocomplete
+      placeholder="Assets"
+      [filteredItems$]="alertGroupsItems$"
+      formControlName="assets"></app-chip-autocomplete>
     <mat-form-field>
       <mat-label>Sensor</mat-label>
       <input matNativeControl type="text" placeholder="Sensor" formControlName="sensor">
@@ -16,11 +21,11 @@
   <div fxLayout="row">
     <mat-form-field>
       <mat-label>Min</mat-label>
-      <input matNativeControl type="number" placeholder="Min" formControlName="min">
+      <input matNativeControl type="number" placeholder="Low" formControlName="low">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Max</mat-label>
-      <input matNativeControl type="number" placeholder="max" formControlName="max">
+      <input matNativeControl type="number" placeholder="High" formControlName="high">
     </mat-form-field>
   </div>
 </form>

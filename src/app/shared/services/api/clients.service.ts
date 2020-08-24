@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from "../../../../environments/environment";
-import { AlertGroupModel, DeviceModel } from "../../models";
-import { TelemetrySummaryModel } from "../../models";
-import { TagGroupModel } from "../../models";
-import { ClientModel } from "../../models";
-import { AlertModel } from "../../models";
+import {
+  AlertGroupModel,
+  DeviceModel,
+  TelemetrySummaryModel,
+  TagGroupModel,
+  ClientModel,
+  AlertModel,
+  AssetModel
+} from "../../models";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -38,6 +42,10 @@ export class ClientsService {
 
   getDevices(clientId: string) {
     return this.http.get<DeviceModel[]>(`${this.baseUrl}/${clientId}/devices`, httpOptions);
+  }
+
+  getAssets(clientId: string) {
+    return this.http.get<AssetModel[]>(`${this.baseUrl}/${clientId}/assets`, httpOptions);
   }
 
   getSummaryTelemetry(clientId: string, start: string, end: string, tags: string, interval: string) {

@@ -8,7 +8,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatIconModule} from "@angular/material/icon";
 import { AlertlistComponent } from './alertlist/alertlist.component';
 import { AlertgroupsComponent } from './alertgroups/alertgroups.component';
-import { StoreModule } from "@ngrx/store";
+import {Store, StoreModule} from "@ngrx/store";
 
 import { EffectsModule } from "@ngrx/effects";
 import { AlertsEffects } from "./alertlist/store/alerts-effects";
@@ -16,6 +16,7 @@ import { AlertGroupsEffects } from "./alertgroups/store/alertgroups-effects";
 
 import * as fromAlerts from './alertlist/store/alerts-reducer';
 import * as fromAlertGroups from './alertgroups/store/alertgroups-reducer';
+import * as fromAssets from '../assets/store/assets-reducer';
 import { AlertsStoreFacade } from "./alertlist/store/alerts-store-facade";
 import { AlertGroupsStoreFacade } from "./alertgroups/store/alertgroups-store-facade";
 import { ClientsService } from "../../shared/services/api";
@@ -35,6 +36,8 @@ import { AlertNewComponent } from './alert-new/alert-new.component';
 import {ChipAutocompleteComponent} from "../../shared/components/chip-autocomplete/chip-autocomplete.component";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
+import {AssetsStoreFacade} from "../assets/store/assets-store-facade";
+import {AssetsEffects} from "../assets/store/assets-effects";
 
 @NgModule({
   declarations: [
@@ -58,7 +61,8 @@ import {MatChipsModule} from "@angular/material/chips";
     MatIconModule,
     StoreModule.forFeature(fromAlertGroups.featureKey, fromAlertGroups.reducer),
     StoreModule.forFeature(fromAlerts.featureKey, fromAlerts.reducer),
-    EffectsModule.forFeature([AlertsEffects, AlertGroupsEffects]),
+    StoreModule.forFeature(fromAssets.featureKey, fromAssets.reducer),
+    EffectsModule.forFeature([AlertsEffects, AlertGroupsEffects, AssetsEffects]),
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
@@ -69,6 +73,11 @@ import {MatChipsModule} from "@angular/material/chips";
     MatAutocompleteModule,
     MatChipsModule
   ],
-  providers: [AlertsStoreFacade, AlertGroupsStoreFacade, ClientsService]
+  providers: [
+    AlertsStoreFacade,
+    AlertGroupsStoreFacade,
+    AssetsStoreFacade,
+    ClientsService
+  ]
 })
 export class AlertsModule { }

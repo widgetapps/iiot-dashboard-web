@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AlertGroupModel, AlertModel } from "../../../shared/models";
+import {AlertGroupModel, AlertModel, AssetModel} from "../../../shared/models";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AlertGroupsStoreFacade } from "../alertgroups/store/alertgroups-store-facade";
+import { AssetsStoreFacade } from "../../assets/store/assets-store-facade";
 import { ListItemModel } from "../../../shared/components/chip-autocomplete/models";
 import { Observable } from "rxjs";
 import { map, pluck } from "rxjs/internal/operators";
@@ -29,12 +30,14 @@ export class AlertFormComponent implements OnInit {
 
   alertForm: FormGroup;
   alertGroupsItems$: Observable<ListItemModel[]>;
+  assetItems$: Observable<ListItemModel[]>;
 
   @Output() save = new EventEmitter<AlertModel>();
 
   constructor(
     private fb: FormBuilder,
-    private alertGroupsFacade: AlertGroupsStoreFacade
+    private alertGroupsFacade: AlertGroupsStoreFacade,
+    private assetFacade: AssetsStoreFacade
   ) {
     this.alertForm = this.fb.group({
       name: [this.alertData.name],
@@ -54,6 +57,15 @@ export class AlertFormComponent implements OnInit {
         item.value = g.code;
         item.display = g.name;
         return item;
+      }))
+    );
+
+    this.assetItems$ = this.assetFacade.assets$.pipe(
+      map((assets: AssetModel[]) => assets.map(asset => {
+          let item = new ListItemModel();
+          item.value = asset._id;
+          item.display = asset.name;
+          return item;
       }))
     );
   }

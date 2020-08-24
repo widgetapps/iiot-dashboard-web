@@ -7,10 +7,10 @@ import {
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ClientsService } from '../../../shared/services/api';
 import {
-  DevicesActionsUnion,
+  AssetsActionsUnion,
   getAll,
   getAllSuccess
-} from './devices-actions';
+} from './assets-actions';
 import { Store } from "@ngrx/store";
 import * as fromRoot from '../../../store';
 import * as authHelper from '../../../shared/helpers/auth.helper';
@@ -22,18 +22,18 @@ import * as authHelper from '../../../shared/helpers/auth.helper';
  */
 
 @Injectable()
-export class DeviceEffects {
+export class AssetsEffects {
 
   getAll$ = createEffect( () => this.actions$.pipe(
     ofType(getAll), /* When action is dispatched */
     startWith(getAll({clientId: authHelper.getUser().client})),
-    switchMap(props => this.clientsService.getDevices(props.clientId).pipe(
-      map(devices => getAllSuccess({devices}))
-    )),
+    switchMap(props => this.clientsService.getAssets(props.clientId).pipe(
+      map(assets => getAllSuccess({assets}))
+    ))
   ));
 
   constructor(
-    private actions$: Actions<DevicesActionsUnion>,
+    private actions$: Actions<AssetsActionsUnion>,
     private clientsService: ClientsService,
     private store: Store<fromRoot.State>
   ) {}

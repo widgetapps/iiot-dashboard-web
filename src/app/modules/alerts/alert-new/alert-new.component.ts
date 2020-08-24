@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertModel } from "../../../shared/models";
 import * as authHelper from "../../../shared/helpers/auth.helper";
 import { AlertFormComponent } from "../alert-form/alert-form.component";
+import {ListItemModel} from "../../../shared/components/chip-autocomplete/models";
+import {AlertsStoreFacade} from "../alertlist/store/alerts-store-facade";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-alert-new',
@@ -12,7 +15,10 @@ export class AlertNewComponent implements OnInit {
 
   @ViewChild(AlertFormComponent) childForm: AlertFormComponent;
 
-  constructor() { }
+  constructor(
+    private alertFacade: AlertsStoreFacade,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -21,11 +27,21 @@ export class AlertNewComponent implements OnInit {
     this.childForm.submit();
   }
 
-  submitted(alert: AlertModel) {
-    console.log(alert);
-    //alertGroup.code = this.getAlertGroupCode(8);
-    //this.alertGroupsFacade.createAlertGroup(authHelper.getUser().client, alertGroup);
-    //this.router.navigate(['/alerts']);
+  submitted(alert: any) {
+
+    alert.active = true;
+    alert.frequencyMinute = 10;
+    alert.alertGroupCodes = alert.alertGroupCodes.map(group => {
+      return group.value;
+    });
+    alert.assets = alert.assets.map(asset => {
+      return asset.value;
+    })
+
+    const newAlert: AlertModel = {...alert };
+
+    this.alertFacade.createAlert(authHelper.getUser().client, newAlert);
+    this.router.navigate(['/alerts']);
   }
 
 }

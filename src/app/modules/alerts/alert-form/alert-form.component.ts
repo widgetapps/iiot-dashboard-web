@@ -43,7 +43,7 @@ export class AlertFormComponent implements OnInit {
       name: [this.alertData.name],
       sensor: [this.alertData.sensor, Validators.required],
       assets: [this.alertData.assets],
-      alertGroups: [this.alertData.alertGroupCodes],
+      alertGroupCodes: [this.alertData.alertGroupCodes],
       low: [this.alertData.limits.low],
       high: [this.alertData.limits.high]
     });

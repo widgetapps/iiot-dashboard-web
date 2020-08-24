@@ -8,14 +8,24 @@
     <app-chip-autocomplete
       placeholder="Alert groups"
       [filteredItems$]="alertGroupsItems$"
-      formControlName="alertGroups"></app-chip-autocomplete>
+      formControlName="alertGroupCodes"></app-chip-autocomplete>
     <app-chip-autocomplete
       placeholder="Assets"
       [filteredItems$]="assetItems$"
       formControlName="assets"></app-chip-autocomplete>
     <mat-form-field>
       <mat-label>Sensor</mat-label>
-      <input matNativeControl type="text" placeholder="Sensor" formControlName="sensor">
+      <select matNativeControl required formControlName="sensor">
+        <option value="VI">Vibration</option>
+        <option value="TI">Temperature (C)</option>
+        <option value="CI">Humidity (%)</option>
+        <option value="PI">Pressure (kPa)</option>
+        <option value="EI">Battery (volts)</option>
+        <option value="MI">RSSI (dBm)</option>
+        <option value="II">Current (amps)</option>
+        <option value="OI">Hydrophone - Summary (Pa-RMS)</option>
+        <option value="NI">Hydrophone - Raw (mV)</option>
+      </select>
     </mat-form-field>
   </div>
   <div fxLayout="row">

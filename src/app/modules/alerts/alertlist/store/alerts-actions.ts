@@ -40,7 +40,7 @@ export const removeAlert = createAction(
 
 export const removeAlertSuccess = createAction(
   '[Alerts] Remove Success',
-  props<{message: string}>()
+  props<{response: any}>()
 );
 
 export const failure = createAction(

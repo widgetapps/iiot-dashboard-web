@@ -7,7 +7,7 @@
           <mat-icon class="example-tab-icon">alarm</mat-icon>
           Alerts
         </ng-template>
-        <app-alertlist></app-alertlist>
+        <app-alertlist [alerts]="alerts$ | async"></app-alertlist>
       </mat-tab>
 
       <mat-tab>

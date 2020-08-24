@@ -4,7 +4,8 @@ import { createReducer, on } from '@ngrx/store';
 import {
   createAlertGroupSuccess,
   getAllAlertGroupsSuccess,
-  removeAlertGroupSuccess, updateAlertGroupSuccess
+  removeAlertGroupSuccess,
+  updateAlertGroupSuccess
 } from './alertgroups-actions';
 
 export const alertGroupsAdapter = createEntityAdapter<AlertGroupModel>({

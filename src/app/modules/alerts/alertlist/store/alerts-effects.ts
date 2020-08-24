@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  map,
+  map, startWith,
   switchMap
 } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -17,7 +17,8 @@ import {
   AlertsActionsUnion
 } from './alerts-actions';
 import { Store } from "@ngrx/store";
-import * as fromRoot from '../../../../store'
+import * as fromRoot from '../../../../store';
+import * as authHelper from "../../../../shared/helpers/auth.helper";
 
 /**
  * Effects file is for isolating and managing side effects of the application in one place
@@ -27,8 +28,15 @@ import * as fromRoot from '../../../../store'
 @Injectable()
 export class AlertsEffects {
 
+  constructor(
+    private actions$: Actions<AlertsActionsUnion>,
+    private clientsService: ClientsService,
+    private store: Store<fromRoot.State>
+  ) {}
+
   getAllAlerts$ = createEffect( () => this.actions$.pipe(
     ofType(getAllAlerts),
+    startWith(getAllAlerts({clientId: authHelper.getUser().client})),
     switchMap(props => this.clientsService.getAlerts(props.clientId).pipe(
       map(alerts => getAllAlertsSuccess({alerts}))
     ))
@@ -51,14 +59,8 @@ export class AlertsEffects {
   removeAlert$ = createEffect(() => this.actions$.pipe(
     ofType(removeAlert),
     switchMap(props => this.clientsService.deleteAlert(props.clientId, props.alertId).pipe(
-      map(message => removeAlertSuccess({message}))
+      map(response => removeAlertSuccess({response}))
     ))
   ));
-
-  constructor(
-    private actions$: Actions<AlertsActionsUnion>,
-    private clientsService: ClientsService,
-    private store: Store<fromRoot.State>
-  ) {}
 
 }

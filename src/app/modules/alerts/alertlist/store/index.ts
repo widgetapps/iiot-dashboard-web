@@ -1,5 +1,5 @@
 import * as fromAlerts from './alerts-reducer';
-import {Action, combineReducers, createFeatureSelector, createSelector} from '@ngrx/store';
+import { Action, combineReducers, createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface AlertsState {
   alerts: fromAlerts.State;

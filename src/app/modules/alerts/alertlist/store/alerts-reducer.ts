@@ -2,7 +2,10 @@ import { AlertModel } from '../../../../shared/models';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import {
-  getAllAlertsSuccess
+  createAlertSuccess,
+  getAllAlertsSuccess,
+  removeAlertSuccess,
+  updateAlertSuccess
 } from './alerts-actions';
 
 // This adapter will allow is to manipulate contacts (mostly CRUD operations)
@@ -23,7 +26,10 @@ export const featureKey = 'alerts';
 
 export const reducer = createReducer<State>(
   INIT_STATE,
-  on(getAllAlertsSuccess, (state, {alerts}) => alertsAdapter.setAll(alerts, state))
+  on(getAllAlertsSuccess, (state, {alerts}) => alertsAdapter.setAll(alerts, state)),
+  on(createAlertSuccess, (state, {alert}) => alertsAdapter.addOne(alert, state)),
+  on(removeAlertSuccess, (state, {response}) => alertsAdapter.removeOne(response._id, state)),
+  on(updateAlertSuccess, (state, {alert}) => alertsAdapter.updateOne({id: alert._id, changes: alert}, state))
 );
 
 // get the selectors
@@ -45,3 +51,5 @@ export const selectAllAlerts = selectAll;
 
 // select the total count
 export const selectAlertTotal = selectTotal;
+
+export const getAlertById = (id: string) => (state: State) => state.entities[id];

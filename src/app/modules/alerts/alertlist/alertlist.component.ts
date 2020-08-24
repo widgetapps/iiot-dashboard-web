@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AlertModel } from "../../../shared/models";
 
 @Component({
   selector: 'app-alertlist',
   templateUrl: './alertlist.component.html',
-  styleUrls: ['./alertlist.component.scss']
+  styleUrls: ['./alertlist.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class AlertlistComponent implements OnInit {
 
-  alerts: AlertModel[];
+  @Input() alerts: AlertModel[];
 
   alertsTrackByFn = (index: number, alert: AlertModel) => alert._id;
 

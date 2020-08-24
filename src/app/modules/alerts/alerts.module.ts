@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { AlertsRoutingModule } from './alerts-routing.module';
 import { AlertsComponent } from './alerts.component';
-import {MatCardModule} from "@angular/material/card";
-import {MatTabsModule} from "@angular/material/tabs";
-import {MatIconModule} from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatIconModule } from "@angular/material/icon";
 import { AlertlistComponent } from './alertlist/alertlist.component';
 import { AlertgroupsComponent } from './alertgroups/alertgroups.component';
-import {Store, StoreModule} from "@ngrx/store";
+import { StoreModule } from "@ngrx/store";
 
 import { EffectsModule } from "@ngrx/effects";
 import { AlertsEffects } from "./alertlist/store/alerts-effects";
@@ -21,23 +21,23 @@ import { AlertsStoreFacade } from "./alertlist/store/alerts-store-facade";
 import { AlertGroupsStoreFacade } from "./alertgroups/store/alertgroups-store-facade";
 import { ClientsService } from "../../shared/services/api";
 import { AlertgroupsFormComponent } from './alertgroups-form/alertgroups-form.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { AlertgroupsNewComponent } from './alertgroups-new/alertgroups-new.component';
 import { AlertgroupsEditComponent } from './alertgroups-edit/alertgroups-edit.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatButtonModule} from "@angular/material/button";
-import {MatDividerModule} from "@angular/material/divider";
-import {FlexModule} from "@angular/flex-layout";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDividerModule } from "@angular/material/divider";
+import { FlexModule } from "@angular/flex-layout";
 import { AlertFormComponent } from './alert-form/alert-form.component';
 import { AlertEditComponent } from './alert-edit/alert-edit.component';
 import { AlertNewComponent } from './alert-new/alert-new.component';
-import {ChipAutocompleteComponent} from "../../shared/components/chip-autocomplete/chip-autocomplete.component";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatChipsModule} from "@angular/material/chips";
-import {AssetsStoreFacade} from "../assets/store/assets-store-facade";
-import {AssetsEffects} from "../assets/store/assets-effects";
+import { ChipAutocompleteComponent } from "../../shared/components/chip-autocomplete/chip-autocomplete.component";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatChipsModule } from "@angular/material/chips";
+import { AssetsStoreFacade } from "../assets/store/assets-store-facade";
+import { AssetsEffects } from "../assets/store/assets-effects";
 
 @NgModule({
   declarations: [
@@ -50,7 +50,6 @@ import {AssetsEffects} from "../assets/store/assets-effects";
     AlertFormComponent,
     AlertEditComponent,
     AlertNewComponent,
-    ChipAutocompleteComponent,
     ChipAutocompleteComponent
   ],
   imports: [

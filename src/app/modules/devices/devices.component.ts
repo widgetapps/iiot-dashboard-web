@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Device } from "../../shared/models";
-import { DevicesStoreFacade } from "./store/store-facade";
-import {Store} from "@ngrx/store";
+import { DeviceModel } from "../../shared/models";
+import { DevicesStoreFacade } from "./store/devices-store-facade";
+import { Store } from "@ngrx/store";
 import * as fromRoot from "../../store";
 
 @Component({
@@ -13,7 +13,7 @@ import * as fromRoot from "../../store";
 export class DevicesComponent implements OnInit {
 
   devices$ = this.devicesFacade.devices$;
-  devicesTrackByFn = (index: number, device: Device) => device._id;
+  devicesTrackByFn = (index: number, device: DeviceModel) => device._id;
 
   constructor(private devicesFacade: DevicesStoreFacade, private store: Store<fromRoot.State>) { }
 

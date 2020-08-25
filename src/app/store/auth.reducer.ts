@@ -1,9 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {login, authSuccess, loginError, logout} from '../core/auth/login/store/actions';
-import { Auth } from '../shared/models';
+import { login, authSuccess, loginError, logout } from '../core/auth/login/store/actions';
+import { AuthModel } from '../shared/models';
 
 export interface State {
-  auth: Auth;
+  auth: AuthModel;
   loggedIn: boolean;
   isLoading: boolean;
   errorMessage: string;

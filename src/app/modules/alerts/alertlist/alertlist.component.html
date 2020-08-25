@@ -1,1 +1,22 @@
-<p>alertlist works!</p>
+<mat-card>
+  <mat-card-content>
+    <div fxLayout="row">
+      <div fxFlex fxLayout fxLayoutAlign="end">
+        <button mat-raised-button routerLink="/alerts/new" color="primary">Add Alert</button>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div fxLayout="row" *ngFor="let alert of alerts; trackBy: alertsTrackByFn">
+        <button mat-icon-button aria-label="Remove alert" (click)="removeAlert(alert._id)">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Edit alert group" (click)="editAlert(alert._id)">
+          <mat-icon>create</mat-icon>
+        </button>
+        <div fxLayout="row" fxLayoutAlign="left center">
+          <div class="alertItem">{{alert.name}} - {{alert.assets.length}} assets(s)</div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

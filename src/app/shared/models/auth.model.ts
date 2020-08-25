@@ -1,4 +1,4 @@
-export class Auth {
+export class AuthModel {
   message: string;
   token: string;
   publicKey: string;

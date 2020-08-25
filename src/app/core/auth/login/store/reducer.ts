@@ -1,11 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { authSuccess, login, logout } from './actions';
-import { User } from '../../../../shared/models';
+import { UserModel } from '../../../../shared/models';
 import * as authHelper from '../../../../shared/helpers/auth.helper';
-import { getAll } from "../../../../modules/clients/store/clients-actions";
 
 export interface State {
-  user: User;
+  user: UserModel;
   loggedIn: boolean;
   isLoading: boolean;
   errorMessage: string;

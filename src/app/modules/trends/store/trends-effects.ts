@@ -24,10 +24,6 @@ import * as fromRoot from '../../../store'
 @Injectable()
 export class TrendsEffects {
 
-  //clientId$ = this.store.select(selectClientId);
-
-  // TODO: Figure out how to get the clientId
-
   getTrends$ = createEffect( () => this.actions$.pipe(
     ofType(getTrends),
     switchMap(props => this.clientsService.getSummaryTelemetry(props.clientId, props.start, props.end, props.tags, props.interval)

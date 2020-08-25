@@ -10,10 +10,10 @@ import {
   DevicesActionsUnion,
   getAll,
   getAllSuccess
-} from './actions';
+} from './devices-actions';
 import { Store } from "@ngrx/store";
-import * as fromRoot from '../../../store'
-import { selectClientId } from "../../../core/auth/login/store";
+import * as fromRoot from '../../../store';
+import * as authHelper from '../../../shared/helpers/auth.helper';
 
 
 /**
@@ -24,16 +24,10 @@ import { selectClientId } from "../../../core/auth/login/store";
 @Injectable()
 export class DeviceEffects {
 
-  //clientId$ = this.store.select(selectClientId);
-
-  // TODO: Figure out how to get the clientId
   getAll$ = createEffect( () => this.actions$.pipe(
     ofType(getAll), /* When action is dispatched */
-    startWith(getAll({clientId: '5e41f50d47504d03aeed10b8'})),
-    /* Hit the Clients Device endpoint of our REST API */
-    /* Dispatch GetAllSuccess action to the central store with id list returned by the backend as id*/
-    /* 'Devices Reducer' will take care of the rest */
-    switchMap(() => this.clientsService.getDevices('5e41f50d47504d03aeed10b8').pipe(
+    startWith(getAll({clientId: authHelper.getUser().client})),
+    switchMap(props => this.clientsService.getDevices(props.clientId).pipe(
       map(devices => getAllSuccess({devices}))
     )),
   ));

@@ -1,0 +1,27 @@
+<form [formGroup]="chipForm">
+  <mat-form-field class="field-full-width">
+    <mat-chip-list #chipList formControlName="control">
+      <mat-chip
+        *ngFor="let chip of control.value"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(chip)">
+        {{chip.display}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="{{placeholder}}"
+        #itemInput
+        [formControl]="itemControl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let item of filteredItems$ | async" [value]="item">
+        {{item.display}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

@@ -5,8 +5,8 @@ import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../shared/services/authentication.service';
 import { LoginActionsUnion, logout, login, authSuccess } from "./actions";
 import { Router } from "@angular/router";
-import {Store} from "@ngrx/store";
-import {getAll} from "../../../../modules/clients/store/clients-actions";
+import { Store } from "@ngrx/store";
+import { getAll } from "../../../../modules/clients/store/clients-actions";
 
 @Injectable()
 export class AuthEffects {

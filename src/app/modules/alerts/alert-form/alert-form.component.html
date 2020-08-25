@@ -1,0 +1,53 @@
+
+<div *ngIf="false">
+  <div *ngFor="let group of alertData.alertGroupCodes">
+    {{group}}
+  </div>
+</div>
+
+<form [formGroup]="alertForm" (submit)="submit()">
+  <input type="hidden" formControlName="_id">
+  <input type="hidden" formControlName="active">
+  <input type="hidden" formControlName="frequencyMinutes">
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>Alert Name</mat-label>
+      <input matNativeControl type="text" placeholder="Name" formControlName="name">
+      <mat-hint>Choose a name that describes the alert</mat-hint>
+    </mat-form-field>
+    <app-chip-autocomplete
+      *ngIf="newState"
+      placeholder="Alert groups"
+      [filteredItems$]="alertGroupsItems$"
+      formControlName="alertGroupCodes"></app-chip-autocomplete>
+    <app-chip-autocomplete
+      *ngIf="newState"
+      placeholder="Assets"
+      [filteredItems$]="assetItems$"
+      formControlName="assets"></app-chip-autocomplete>
+    <mat-form-field>
+      <mat-label>Sensor</mat-label>
+      <select matNativeControl required formControlName="sensorCode">
+        <option value="VI">VI: Vibration</option>
+        <option value="TI">TI: Temperature (C)</option>
+        <option value="CI">CI: Humidity (%)</option>
+        <option value="PI">PI: Pressure (kPa)</option>
+        <option value="EI">EI: Battery (volts)</option>
+        <option value="MI">MI: RSSI (dBm)</option>
+        <option value="II">II: Current (amps)</option>
+        <option value="OI">OI: Hydrophone - Summary (Pa-RMS)</option>
+        <option value="NI">NI: Hydrophone - Raw (mV)</option>
+      </select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" formGroupName="limits">
+    <mat-form-field>
+      <mat-label>Min</mat-label>
+      <input matNativeControl type="number" placeholder="Low" formControlName="low">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Max</mat-label>
+      <input matNativeControl type="number" placeholder="High" formControlName="high">
+    </mat-form-field>
+  </div>
+</form>

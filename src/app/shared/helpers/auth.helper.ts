@@ -1,10 +1,10 @@
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { User } from "../models";
+import { UserModel } from "../models";
 
 const jwtHelper = new JwtHelperService();
 
 export function processJwt(jwt: string) {
-  const decodedUser: User = jwtHelper.decodeToken((jwt));
+  const decodedUser: UserModel = jwtHelper.decodeToken((jwt));
   localStorage.setItem('currentUser', JSON.stringify(decodedUser));
   localStorage.setItem('jwt', jwt);
 }
@@ -28,11 +28,11 @@ export function logout() {
 }
 
 export function getUser() {
-  const user: User = JSON.parse(localStorage.getItem('currentUser'));
+  const user: UserModel = JSON.parse(localStorage.getItem('currentUser'));
   return user;
 }
 
 export function getApiKey() {
-  const user: User = getUser();
+  const user: UserModel = getUser();
   return user.apiKey;
 }

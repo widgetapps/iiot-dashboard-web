@@ -1,7 +1,7 @@
 import { TelemetryData } from "./telemetry/data.model";
 import { Deserializable } from "./deserializable.model";
 
-export class TelemetrySummary implements Deserializable {
+export class TelemetrySummaryModel implements Deserializable {
   tag: string;
   date: string;
   data: TelemetryData;

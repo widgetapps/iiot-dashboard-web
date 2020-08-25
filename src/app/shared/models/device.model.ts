@@ -1,4 +1,4 @@
-export class Device {
+export class DeviceModel {
   _id: string;
   created: number;
   updated: number;

@@ -5,7 +5,7 @@ import { login, logout } from './store/actions';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import {clearClients, getAll} from "../../../modules/clients/store/clients-actions";
+import { clearClients } from "../../../modules/clients/store/clients-actions";
 import { clearTrends } from "../../../modules/trends/store/trends-actions";
 
 @Component({

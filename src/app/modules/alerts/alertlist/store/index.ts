@@ -30,3 +30,8 @@ export const selectAlertTotal = createSelector(
   getAlertsState,
   fromAlerts.selectAlertTotal
 );
+
+export const getAlertById = (id: string) => createSelector(
+  getAlertsState,
+  fromAlerts.getAlertById(id)
+);

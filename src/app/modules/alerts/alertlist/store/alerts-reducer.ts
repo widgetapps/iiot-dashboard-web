@@ -28,7 +28,7 @@ export const reducer = createReducer<State>(
   INIT_STATE,
   on(getAllAlertsSuccess, (state, {alerts}) => alertsAdapter.setAll(alerts, state)),
   on(createAlertSuccess, (state, {alert}) => alertsAdapter.addOne(alert, state)),
-  on(removeAlertSuccess, (state, {response}) => alertsAdapter.removeOne(response._id, state)),
+  on(removeAlertSuccess, (state, {response}) => alertsAdapter.removeOne(response.id, state)),
   on(updateAlertSuccess, (state, {alert}) => alertsAdapter.updateOne({id: alert._id, changes: alert}, state))
 );
 

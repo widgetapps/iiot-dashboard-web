@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {AlertGroupModel, AlertModel, AssetModel} from "../../../shared/models";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AlertGroupsStoreFacade } from "../alertgroups/store/alertgroups-store-facade";
@@ -12,21 +12,22 @@ import { map, pluck } from "rxjs/internal/operators";
   templateUrl: './alert-form.component.html',
   styleUrls: ['./alert-form.component.scss']
 })
-export class AlertFormComponent implements OnInit {
+export class AlertFormComponent implements OnInit, OnChanges {
 
   @Input() alertData: AlertModel = {
     _id: '',
     name: '',
     assets: [],
-    sensor: '',
+    sensorCode: '',
     alertGroupCodes: [],
     active: false,
-    frequencyMinute: 15,
+    frequencyMinutes: 15,
     limits: {
       low: 0,
       high: 10
     }
   };
+  @Input() newState = false;
 
   alertForm: FormGroup;
   alertGroupsItems$: Observable<ListItemModel[]>;
@@ -40,12 +41,17 @@ export class AlertFormComponent implements OnInit {
     private assetFacade: AssetsStoreFacade
   ) {
     this.alertForm = this.fb.group({
+      _id: [this.alertData._id],
       name: [this.alertData.name],
-      sensor: [this.alertData.sensor, Validators.required],
+      sensorCode: [this.alertData.sensorCode, Validators.required],
       assets: [this.alertData.assets],
       alertGroupCodes: [this.alertData.alertGroupCodes],
-      low: [this.alertData.limits.low],
-      high: [this.alertData.limits.high]
+      active: [this.alertData.active],
+      frequencyMinutes: [this.alertData.frequencyMinutes],
+      limits: this.fb.group({
+        low: [this.alertData.limits.low],
+        high: [this.alertData.limits.high]
+      })
     });
   }
 
@@ -68,6 +74,12 @@ export class AlertFormComponent implements OnInit {
           return item;
       }))
     );
+  }
+
+  ngOnChanges() {
+    if (this.alertData) {
+      this.alertForm.patchValue({...this.alertData});
+    }
   }
 
   submit() {

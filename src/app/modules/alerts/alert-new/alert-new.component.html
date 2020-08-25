@@ -3,7 +3,7 @@
     Add Alert
   </mat-card-title>
   <mat-card-content>
-    <app-alert-form (save)="submitted($event)"></app-alert-form>
+    <app-alert-form (save)="submitted($event)" [newState]="true"></app-alert-form>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="submit()" color="primary">Add Alert</button>

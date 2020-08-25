@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { AlertGroupModel } from "../../../shared/models";
 import { AlertGroupsStoreFacade } from "./store/alertgroups-store-facade";
 import * as authHelper from '../../../shared/helpers/auth.helper';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-alertgroups',

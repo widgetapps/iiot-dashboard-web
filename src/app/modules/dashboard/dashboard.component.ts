@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as authHelper from '../../shared/helpers/auth.helper';
+import { getAll } from "../clients/store/clients-actions";
+import { Store } from "@ngrx/store";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,15 +9,10 @@ import * as authHelper from '../../shared/helpers/auth.helper';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-  }
-
-  loginStateToConsole() {
-    //console.log('Logged In State: ' + getLoggedIn);
-    console.log('Token: ' + authHelper.getJwt());
-    console.log('API Key: ' + authHelper.getApiKey());
+    this.store.dispatch(getAll());
   }
 
 }

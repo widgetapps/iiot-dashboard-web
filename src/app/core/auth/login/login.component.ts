@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
 
   authenticate(email: string, password: string) {
     this.store.dispatch(login({ email: email, password: password }));
-    //this.router.navigateByUrl('/dashboard');
   }
 
   openSnackBar(message: string) {

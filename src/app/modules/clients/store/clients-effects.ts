@@ -24,7 +24,6 @@ export class ClientsEffects {
 
   getAll$ = createEffect( () => this.actions$.pipe(
     ofType(getAll),
-    startWith(getAll()),
     switchMap(() => this.clientsService.getClients().pipe(
       map(clients => getAllSuccess({clients}))
     ))

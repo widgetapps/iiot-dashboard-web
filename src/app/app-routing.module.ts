@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'notifications', loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule), canActivate: [AuthGuard] },
   { path: 'trends', loadChildren: () => import('./modules/trends/trends.module').then(m => m.TrendsModule), canActivate: [AuthGuard] },
   { path: 'users', loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule), canActivate: [AuthGuard] },
-  { path: '',   redirectTo: '/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({

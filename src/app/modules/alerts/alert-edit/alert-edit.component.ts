@@ -34,7 +34,6 @@ export class AlertEditComponent implements OnInit {
   }
 
   submitted(alert: AlertModel) {
-    console.log(alert);
     this.alertsFacade.editAlert(authHelper.getUser().client, alert._id, alert);
     this.router.navigate(['/alerts']);
   }

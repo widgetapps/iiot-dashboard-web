@@ -27,8 +27,6 @@ export class AlertNewComponent implements OnInit {
   }
 
   submitted(alert: any) {
-    console.log(alert);
-
     delete alert._id;
     alert.active = true;
     alert.frequencyMinutes = 10;

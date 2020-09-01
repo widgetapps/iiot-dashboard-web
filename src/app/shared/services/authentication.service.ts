@@ -15,14 +15,6 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http.post(`${environment.apiUrl}/authenticate`, {'email': email, 'password': password}, httpOptions);
-    /*
-      .pipe(
-        tap(response => {
-          // authentication and local storage code can go here
-          console.log('Login response: ' + JSON.stringify(response));
-        })
-      );
-     */
   }
 
   validate() {

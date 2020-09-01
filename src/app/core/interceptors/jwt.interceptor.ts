@@ -34,7 +34,8 @@ export class JwtInterceptor implements HttpInterceptor {
             return;
           }
           authHelper.logout();
-          this.router.navigateByUrl('/login')
+          // TODO: This should go to an error page to inform the user what happened
+          this.router.navigateByUrl('/home')
         }
       }));
   }

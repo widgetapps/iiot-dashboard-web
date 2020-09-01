@@ -6,7 +6,6 @@ import { AuthenticationService } from '../../../../shared/services/authenticatio
 import { LoginActionsUnion, logout, login, authSuccess } from "./actions";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { getAll } from "../../../../modules/clients/store/clients-actions";
 
 @Injectable()
 export class AuthEffects {
@@ -26,7 +25,6 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(authSuccess),
       tap(() => {
-        this.store.dispatch(getAll());
         this.router.navigate(['/dashboard']);
       })
     ),

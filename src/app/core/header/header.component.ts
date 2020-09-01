@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ClientsStoreFacade } from "../../modules/clients/store/clients-store-facade";
 import * as fromUser from '../auth/login/store'
+import * as fromClient from '../../modules/clients/store';
 import { select, Store } from "@ngrx/store";
 
 @Component({
@@ -10,11 +10,10 @@ import { select, Store } from "@ngrx/store";
 })
 
 export class HeaderComponent implements OnInit {
-  clients$ = this.clientsFacade.clients$;
+  clients$ = this.store.pipe(select(fromClient.selectAllClients));
   user$ = this.store.pipe(select(fromUser.selectUser));
 
   constructor(
-    private clientsFacade: ClientsStoreFacade,
     private store: Store
   ) { }
 

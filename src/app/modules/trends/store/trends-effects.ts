@@ -9,7 +9,7 @@ import { ClientsService } from '../../../shared/services/api';
 import {
   TrendsActionsUnion,
   getTrends,
-  getTrendsSuccess, getTags, getTagsSuccess
+  getTrendsSuccess, getTags, getTagsSuccess, getRawData, getRawDataSuccess
 } from './trends-actions';
 import { Store } from "@ngrx/store";
 import { EMPTY } from 'rxjs';
@@ -29,6 +29,15 @@ export class TrendsEffects {
     switchMap(props => this.clientsService.getSummaryTelemetry(props.clientId, props.start, props.end, props.tags, props.interval)
       .pipe(
         map(data => getTrendsSuccess({data}))
+      )
+    ),
+  ));
+
+  getRawData$ = createEffect( () => this.actions$.pipe(
+    ofType(getRawData),
+    switchMap(props => this.clientsService.getRawTelemetry(props.clientId, props.start, props.end, props.tags)
+      .pipe(
+        map(data => getRawDataSuccess({data}))
       )
     ),
   ));

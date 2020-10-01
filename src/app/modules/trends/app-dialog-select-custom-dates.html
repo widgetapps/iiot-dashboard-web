@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Custom Date Range</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [matDatepicker]="pickerStart" placeholder="Choose a start date" [(ngModel)]="data.startDate">
+    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+    <mat-datepicker #pickerStart></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="time" placeholder="Choose a start time" [(ngModel)]="data.startTime">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="pickerEnd" placeholder="Choose an end date" [(ngModel)]="data.endDate">
+    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+    <mat-datepicker #pickerEnd></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="time" placeholder="Choose an end time" [(ngModel)]="data.endTime">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose aggregation interval</mat-label>
+    <mat-select [(value)]="data.interval">
+      <mat-option *ngFor="let interval of intervalOptions" [value]="interval.value">
+        {{interval.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>

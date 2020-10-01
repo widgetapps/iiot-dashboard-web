@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from "@ngrx/store";
 import * as fromRoot from "../../store";
-import {getTags, getTrends} from "./store/trends-actions";
+import { getTags, getTrends } from "./store/trends-actions";
 import { TrendsStoreFacade } from "./store/trends-store-facade";
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
@@ -13,8 +13,14 @@ import { TrendsEffects } from "./store/trends-effects";
 import { TagGroupModel } from "../../shared/models";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { getSelectedClient } from "../clients/store";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 export interface DateOptions {
+  value: string;
+  viewValue: string;
+}
+
+export interface IntervalOptions {
   value: string;
   viewValue: string;
 }
@@ -45,7 +51,6 @@ export class TrendsComponent implements OnInit, OnDestroy {
     {value: '4', viewValue: 'Last month'},
     {value: '5', viewValue: 'Custom'}
   ];
-  // If the user selects Custom, display a dialog letting the user select start date/time and duration and compare
 
   public selectedDateOption = '1';
   public activeDateOption = '1';
@@ -155,7 +160,8 @@ export class TrendsComponent implements OnInit, OnDestroy {
     private store: Store<fromRoot.State>,
     private trendsEffects: TrendsEffects,
     private snackBar: MatSnackBar,
-    private trendsStoreFacade: TrendsStoreFacade
+    private trendsStoreFacade: TrendsStoreFacade,
+    public dialog: MatDialog
   ) {
   }
 
@@ -302,12 +308,10 @@ export class TrendsComponent implements OnInit, OnDestroy {
         endDate = moment(startDate).add(1, 'months');
         this.telemetryInterval = '12h';
         break;
-        /*
       case '5':
-        this.openDialog();
+        this.openCustomDialog();
         return;
         break;
-        */
     }
     this.startDate = startDate;
     this.endDate = endDate;
@@ -324,8 +328,91 @@ export class TrendsComponent implements OnInit, OnDestroy {
     // console.log(event, active);
   }
 
+  openCustomDialog(): void {
+
+    const dialogRef = this.dialog.open(DialogSelectCustomDatesComponent, {
+      width: '350px',
+      data: {
+        startDate: this.startDate.format('YYYY-MM-DD'),
+        endDate: this.endDate.format('YYYY-MM-DD'),
+        startTime: this.startDate.format('HH:mm'),
+        endTime: this.endDate.format('HH:mm'),
+        interval: this.telemetryInterval
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === undefined) {
+        return;
+      }
+
+      if (result.startTime === undefined || result.endTime === undefined) {
+        this.openSnackBar('Invalid start or end times. Dates not updated.');
+        return;
+      }
+
+      const startTimeSplit = result.startTime.split(':');
+      const startMinutes = (parseInt(startTimeSplit[0], 10) * 60) + parseInt(startTimeSplit[1], 10);
+
+      const endTimeSplit = result.endTime.split(':');
+      const endMinutes = (parseInt(endTimeSplit[0], 10) * 60) + parseInt(endTimeSplit[1], 10);
+
+      result.startDate = moment(result.startDate).add(startMinutes, 'minutes');
+      result.endDate = moment(result.endDate).add(endMinutes, 'minutes');
+
+      console.log(result);
+      this.startDate = result.startDate;
+      this.endDate = result.endDate;
+      this.telemetryInterval = result.interval;
+      this.getTrends();
+    });
+  }
+
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Ok');
+  }
+
+}
+
+export interface DialogData {
+  startDate: object;
+  endDate: object;
+  startTime: string;
+  endTime: string;
+  interval: string;
+}
+
+@Component({
+  selector: 'app-dialog-select-custom-dates',
+  templateUrl: 'app-dialog-select-custom-dates.html',
+})
+export class DialogSelectCustomDatesComponent {
+
+  intervalOptions: IntervalOptions[] = [
+    {value: '1s', viewValue: '1 second'},
+    {value: '5s', viewValue: '5 seconds'},
+    {value: '10s', viewValue: '10 seconds'},
+    {value: '30s', viewValue: '30 seconds'},
+    {value: '1m', viewValue: '1 minute'},
+    {value: '5m', viewValue: '5 minutes'},
+    {value: '10m', viewValue: '10 minutes'},
+    {value: '30m', viewValue: '30 minutes'},
+    {value: '1h', viewValue: '1 hour'},
+    {value: '2h', viewValue: '2 hours'},
+    {value: '4h', viewValue: '4 hours'},
+    {value: '6h', viewValue: '5 hours'},
+    {value: '8h', viewValue: '8 hours'},
+    {value: '12h', viewValue: '12 hours'},
+    {value: '1d', viewValue: '1 day'},
+    {value: '1w', viewValue: '1 week'}
+  ];
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogSelectCustomDatesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

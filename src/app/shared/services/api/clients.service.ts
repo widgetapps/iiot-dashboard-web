@@ -10,6 +10,7 @@ import {
   AlertModel,
   AssetModel
 } from "../../models";
+import { TelemetryRawModel } from "../../models/telemetryraw.model";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -50,7 +51,12 @@ export class ClientsService {
 
   getSummaryTelemetry(clientId: string, start: string, end: string, tags: string, interval: string) {
     return this.http.get<TelemetrySummaryModel[]>(`${this.baseUrl}/${clientId}/telemetries/summary?` +
-      `start=${start}&end=${end}&tags=${tags}&interval=${interval}`);
+      `start=${start}&end=${end}&tags=${tags}&interval=${interval}&includeValues=1`);
+  }
+
+  getRawTelemetry(clientId: string, start: string, end: string, tags: string) {
+    return this.http.get<TelemetryRawModel[]>(`${this.baseUrl}/${clientId}/telemetries/search?` +
+    `start=${start}&end=${end}&tags=${tags}`);
   }
 
   getTagList(clientId: string) {

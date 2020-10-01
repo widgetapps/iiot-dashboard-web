@@ -5,6 +5,7 @@ export class TelemetryData implements Deserializable {
   unit: string;
   count: number;
   summary: DataSummary;
+  values: number[];
 
   deserialize(input: any): this {
     Object.assign(this, input);

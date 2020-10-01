@@ -2,7 +2,6 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { clearTrends, getTags, getTagsSuccess, getTrends, getTrendsSuccess } from './trends-actions';
 import { TelemetrySummaryModel } from "../../../shared/models";
 import { TagGroupModel } from "../../../shared/models";
-import { clientsAdapter } from "../../clients/store/clients-reducer";
 
 export interface State {
   telemetry: TelemetrySummaryModel[];

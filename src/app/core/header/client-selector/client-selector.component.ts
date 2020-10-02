@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ClientModel } from '../../../shared/models';
 import { select, Store } from "@ngrx/store";
-import { setSelected } from "../../../modules/clients/store/clients-actions";
+import { setSelectedClient } from "../../../modules/clients/store/clients-actions";
 import { getTags } from "../../../modules/trends/store/trends-actions";
 import { getSelectedClient } from "../../../modules/clients/store";
 
@@ -28,7 +28,7 @@ export class ClientSelectorComponent implements OnInit, OnDestroy {
   }
 
   updateSelectedClient(e) {
-    this.store.dispatch(setSelected({client: e.value}));
+    this.store.dispatch(setSelectedClient({client: e.value}));
     this.store.dispatch(getTags({clientId: e.value}));
   }
 

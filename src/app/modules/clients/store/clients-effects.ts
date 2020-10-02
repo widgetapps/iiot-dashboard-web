@@ -8,8 +8,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ClientsService } from '../../../shared/services/api';
 import {
   ClientsActionsUnion,
-  getAll,
-  getAllSuccess
+  getAllClients,
+  getAllClientsSuccess
 } from './clients-actions';
 import { Store } from "@ngrx/store";
 import * as fromRoot from '../../../store'
@@ -23,9 +23,9 @@ import * as fromRoot from '../../../store'
 export class ClientsEffects {
 
   getAll$ = createEffect( () => this.actions$.pipe(
-    ofType(getAll),
+    ofType(getAllClients),
     switchMap(() => this.clientsService.getClients().pipe(
-      map(clients => getAllSuccess({clients}))
+      map(clients => getAllClientsSuccess({clients}))
     ))
   ));
 

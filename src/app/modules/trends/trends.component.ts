@@ -1,6 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from "@ngrx/store";
 import * as fromRoot from "../../store";
+import * as authHelper from '../../shared/helpers/auth.helper';
 import { getTags, getTrends } from "./store/trends-actions";
 import { TrendsStoreFacade } from "./store/trends-store-facade";
 import { ChartDataSets, ChartOptions } from 'chart.js';
@@ -14,6 +15,7 @@ import { TagGroupModel } from "../../shared/models";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { getSelectedClient } from "../clients/store";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import {getAllClients, setSelectedClient} from "../clients/store/clients-actions";
 
 export interface DateOptions {
   value: string;
@@ -176,6 +178,8 @@ export class TrendsComponent implements OnInit, OnDestroy {
     this.trendsSub = this.trendsEffects.getTrends$.subscribe((data) => { this.handleTelemetryChange(data) });
     this.store.dispatch(getTags({clientId: this.clientId}));
     this.tags$ = this.trendsStoreFacade.tags$;
+    this.store.dispatch(getAllClients());
+    this.store.dispatch(setSelectedClient({client: authHelper.getUser().client}));
   }
 
   ngOnDestroy() {

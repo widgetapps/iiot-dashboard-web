@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Store} from "@ngrx/store";
+import {getAllClients, setSelectedClient} from "./store/clients-actions";
+import * as authHelper from "../../shared/helpers/auth.helper";
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(getAllClients());
+    this.store.dispatch(setSelectedClient({client: authHelper.getUser().client}));
   }
 
 }

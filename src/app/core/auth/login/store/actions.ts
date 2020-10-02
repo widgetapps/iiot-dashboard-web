@@ -17,6 +17,11 @@ export const authSuccess = createAction(
   props<{ response: AuthModel }>()
 );
 
+export const reloadAuth = createAction(
+  '[Login API] Reload Auth',
+  props<{ response: AuthModel }>()
+);
+
 export const logout = createAction(
   '[Login Page] Logout'
 );

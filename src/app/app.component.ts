@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as authHelper from './shared/helpers/auth.helper';
 import { AuthModel } from "./shared/models";
 import { Store } from "@ngrx/store";
-import { authSuccess } from "./core/auth/login/store/actions";
+import { reloadAuth } from "./core/auth/login/store/actions";
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
         publicKey: publicKey
       }
 
-      this.store.dispatch(authSuccess({response: authResponse}));
+      this.store.dispatch(reloadAuth({response: authResponse}));
 
     }
   }

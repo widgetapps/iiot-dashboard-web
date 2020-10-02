@@ -1,16 +1,16 @@
 import { createAction, props, union } from '@ngrx/store';
 import { ClientModel } from "../../../shared/models";
 
-export const getAll = createAction (
+export const getAllClients = createAction (
   '[Clients] Get All'
 );
 
-export const getAllSuccess = createAction (
+export const getAllClientsSuccess = createAction (
   '[Clients] Get All Success',
   props<{clients: ClientModel[]}>()
 );
 
-export const setSelected = createAction (
+export const setSelectedClient = createAction (
   '[Clients] Set Selected',
   props<{client: string}>()
 );
@@ -25,9 +25,9 @@ export const clearClients = createAction(
 );
 
 const all = union({
-  getAll,
-  getAllSuccess,
-  setSelected,
+  getAllClients,
+  getAllClientsSuccess,
+  setSelectedClient,
   failure
 });
 

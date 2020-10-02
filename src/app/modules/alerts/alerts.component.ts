@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AlertGroupsStoreFacade } from "./alertgroups/store/alertgroups-store-facade";
 import { AlertsStoreFacade } from "./alertlist/store/alerts-store-facade";
+import {Store} from "@ngrx/store";
+import {getAllClients, setSelectedClient} from "../clients/store/clients-actions";
+import * as authHelper from "../../shared/helpers/auth.helper";
 
 @Component({
   selector: 'app-alerts',
@@ -16,10 +19,13 @@ export class AlertsComponent implements OnInit {
 
   constructor(
     private alertGroupsFacade: AlertGroupsStoreFacade,
-    private alertsFacade: AlertsStoreFacade
+    private alertsFacade: AlertsStoreFacade,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
+    this.store.dispatch(getAllClients());
+    this.store.dispatch(setSelectedClient({client: authHelper.getUser().client}));
   }
 
 }

@@ -2,7 +2,7 @@ import { ClientModel } from '../../../shared/models';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import {
-  getAllSuccess, setSelected, clearClients
+  clearClients, getAllClientsSuccess, setSelectedClient
 } from './clients-actions';
 import {authSuccess} from "../../../core/auth/login/store/actions";
 import * as authHelper from '../../../shared/helpers/auth.helper';
@@ -27,9 +27,9 @@ export const featureKey = 'clients';
 
 export const reducer = createReducer<State>(
   INIT_STATE,
-  on(getAllSuccess, (state, {clients}) => clientsAdapter.setAll(clients, state)),
+  on(getAllClientsSuccess, (state, {clients}) => clientsAdapter.setAll(clients, state)),
   on(authSuccess, (state, {response}) => ({...state, selected: authHelper.getUser().client})),
-  on(setSelected, (state, {client}) => ({...state, selected: client})),
+  on(setSelectedClient, (state, {client}) => ({...state, selected: client})),
   on(clearClients, state => { return clientsAdapter.removeAll({...state, selected: null}) })
 );
 

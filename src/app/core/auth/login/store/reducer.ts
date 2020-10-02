@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { authSuccess, login, logout } from './actions';
+import {authSuccess, login, logout, reloadAuth} from './actions';
 import { UserModel } from '../../../../shared/models';
 import * as authHelper from '../../../../shared/helpers/auth.helper';
 
@@ -24,6 +24,7 @@ export const featureKey = 'user';
 const loginReducer = createReducer(initialState,
   on(login, state => ({ ...state, user: state.user })),
   on(authSuccess, (state, { response }) => handleLoginResponse(response, state)),
+  on(reloadAuth, (state, { response }) => handleLoginResponse(response, state)),
   on(logout, state => handleLogout(state))
 );
 

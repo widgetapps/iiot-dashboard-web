@@ -176,7 +176,7 @@ export class TrendsComponent implements OnInit, OnDestroy {
     this.lineChartLabels = ['0', '0'];
 
     this.trendsSub = this.trendsEffects.getTrends$.subscribe((data) => { this.handleTelemetryChange(data) });
-    this.store.dispatch(getTags({clientId: this.clientId}));
+    this.store.dispatch(getTags({clientId: authHelper.getUser().client}));
     this.tags$ = this.trendsStoreFacade.tags$;
     this.store.dispatch(getAllClients());
     this.store.dispatch(setSelectedClient({client: authHelper.getUser().client}));
